@@ -1,0 +1,24 @@
+{
+  "count": 120,
+  "sourceFps": 24,
+  "sampledEvery": 2,
+  "source": "gemini_generated_video_95bc4d63.mp4 (1280x720, 10 s, 240 frames)",
+  "desktop": {
+    "width": 1280,
+    "height": 720,
+    "pattern": "frames/desktop/f-{i}.webp",
+    "indexPad": 3,
+    "poster": "frames/desktop/poster",
+    "bytes": 5568548
+  },
+  "mobile": {
+    "width": 405,
+    "height": 720,
+    "pattern": "frames/mobile/f-{i}.webp",
+    "indexPad": 3,
+    "poster": "frames/mobile/poster",
+    "bytes": 2148464
+  },
+  "watermark": "Gemini sparkle (bottom-right, x1136-1183 y576-623) removed by inverse alpha blending + edge inpaint; audio dropped",
+  "generatedAt": "2026-11-09T17:13:36Z"
+}
