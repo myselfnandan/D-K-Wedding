@@ -20,7 +20,6 @@ const ev = (id: string, start: string | null, end: string | null, extra: Partial
   id,
   order: 0,
   title: id,
-  titleKn: id,
   date: (start ?? '2026-12-03').slice(0, 10),
   startDateTime: start,
   endDateTime: end,

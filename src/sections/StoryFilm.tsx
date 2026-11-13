@@ -19,7 +19,6 @@ interface Chapter {
   n: string;
   kicker: string;
   title: string;
-  kn?: string;
   body: string;
   photo?: string;
   photoAlt?: string;
@@ -45,7 +44,6 @@ const CHAPTERS: Chapter[] = [
     n: '03',
     kicker: 'The venue',
     title: 'Pushpagiri, on the hill',
-    kn: 'ಶ್ರೀ ಪುಷ್ಪಗಿರಿ ಮಹಾಸಂಸ್ಥಾನ',
     body: 'We marry at the Sri Pushpagiri Mahasamsthana Kalyana Mantapa — about seven minutes’ drive from the Hoysaleswara temple.',
     photo: 'hoysaleswara',
     photoAlt: 'The Hoysaleswara temple',
@@ -54,14 +52,12 @@ const CHAPTERS: Chapter[] = [
     n: '04',
     kicker: 'Tuesday · 1 December',
     title: 'Devatha Karya',
-    kn: 'ದೇವತಾಕಾರ್ಯ',
     body: 'The celebrations open at the groom’s home with prayers to the family deities.',
   },
   {
     n: '05',
     kicker: 'Thursday · 3 December · 8:30 am',
     title: 'The Muhurtha',
-    kn: 'ಮುಹೂರ್ತ · ಧನು ಲಗ್ನ',
     body: 'In Dhanu lagna, as the morning light comes up over the hills, two families become one.',
     photo: 'makara',
     photoAlt: 'A carved makara on the Hoysaleswara temple',
@@ -70,7 +66,6 @@ const CHAPTERS: Chapter[] = [
     n: '06',
     kicker: 'From 11:30 am',
     title: 'Aaratakshate & Bhojana',
-    kn: 'ಆರತಕ್ಷತೆ · ಭೋಜನ',
     body: 'Bless the couple at the reception, then sit down to the wedding feast from 12:30. Afterwards, the destination is yours.',
     cta: { label: 'Plan your free time', target: 'explore' },
   },
@@ -91,11 +86,6 @@ function ChapterText({ c, i, p, total }: { c: Chapter; i: number; p: MotionValue
       <p className="chapter-n display">{c.n}</p>
       <p className="eyebrow">{c.kicker}</p>
       <h3 className="display h-lg">{c.title}</h3>
-      {c.kn && (
-        <p className="kn chapter-kn" lang="kn">
-          {c.kn}
-        </p>
-      )}
       <p className="chapter-body">{c.body}</p>
       {c.cta && (
         <button className="btn btn-iris" onClick={() => scrollToId(c.cta!.target)}>
@@ -156,7 +146,6 @@ export function StoryFilm() {
               <p className="chapter-n display">{c.n}</p>
               <p className="eyebrow">{c.kicker}</p>
               <h3 className="display h-md">{c.title}</h3>
-              {c.kn && <p className="kn chapter-kn" lang="kn">{c.kn}</p>}
               <p className="chapter-body">{c.body}</p>
             </article>
           ))}

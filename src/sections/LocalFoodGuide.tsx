@@ -24,7 +24,7 @@ export function LocalFoodGuide() {
             {regionalDishes.map((d, i) => (
               <Reveal as="li" key={d.name} delay={i * 0.05} className="dish">
                 <p className="display h-sm">
-                  {d.name} <span className="kn small" lang="kn">{d.kn}</span>
+                  {d.name}
                 </p>
                 <p className="muted">{d.note}</p>
               </Reveal>

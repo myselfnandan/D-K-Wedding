@@ -14,13 +14,9 @@
   margin: 0;
 }
 .invocations {
-  list-style: none;
   margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
   font-size: 13px;
+  line-height: 1.7;
   color: var(--accent);
 }
 
@@ -190,11 +186,6 @@
   margin: 8px 0 8px;
   color: var(--ink);
 }
-.event-kn {
-  font-size: 0.55em;
-  color: var(--muted);
-  margin-left: 6px;
-}
 .event-when,
 .event-where {
   display: flex;
@@ -276,10 +267,6 @@
 }
 .dish p {
   margin: 0 0 6px;
-}
-.dish .kn {
-  color: var(--mist);
-  margin-left: 4px;
 }
 .food-side {
   display: flex;
@@ -610,7 +597,7 @@
   padding-top: 90px;
   padding-bottom: 220px;
 }
-.closing-kn {
+.closing-kicker {
   color: var(--accent);
   margin: 0;
 }

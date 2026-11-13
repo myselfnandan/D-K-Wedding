@@ -73,7 +73,6 @@ function AttractionCard({ a, i, active, onFocus }: { a: Attraction; i: number; a
       <div className="place-body">
         <p className="small place-cats">{a.categories.map((c) => CATEGORY_LABELS[c]).join(' · ')}</p>
         <h3 className="display h-sm">{a.name}</h3>
-        {a.nameKn && <p className="kn small muted" lang="kn">{a.nameKn}</p>}
         <p className="place-desc">{a.description}</p>
         <ul className="place-facts">
           <li><Car size={15} aria-hidden="true" /> {a.roadDistanceKm.value} km · {formatDuration(a.drivingTimeFromVenue.value)} drive</li>

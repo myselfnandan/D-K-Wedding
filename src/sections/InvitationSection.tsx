@@ -10,11 +10,7 @@ export function InvitationSection() {
       <div className="wrap invitation-grid">
         <div className="invitation-copy">
           <Reveal>
-            <ul className="invocations kn" lang="kn" aria-label="Invocations">
-              {INVOCATIONS.map((i) => (
-                <li key={i}>{i}</li>
-              ))}
-            </ul>
+            <p className="invocations">{INVOCATIONS.join(' · ')}</p>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="eyebrow">The invitation</p>
@@ -34,18 +30,12 @@ export function InvitationSection() {
             <div className="name-pair">
               <div>
                 <p className="display h-md">{COUPLE.groom.full}</p>
-                <p className="kn muted" lang="kn">
-                  {COUPLE.groom.kn}
-                </p>
               </div>
               <span className="name-with italic display" aria-hidden="true">
                 with
               </span>
               <div>
                 <p className="display h-md">{COUPLE.bride.full}</p>
-                <p className="kn muted" lang="kn">
-                  {COUPLE.bride.kn}
-                </p>
               </div>
             </div>
           </Reveal>
@@ -63,9 +53,7 @@ export function InvitationSection() {
             <div className="welcome-by">
               <p className="small muted">With love, awaiting your arrival</p>
               <p className="display h-sm">{HOSTS.awaiting.join(' · ')}</p>
-              <p className="small muted">
-                {HOSTS.welcome} · <span className="kn" lang="kn">{HOSTS.welcomeKn}</span>
-              </p>
+              <p className="small muted">{HOSTS.welcome}</p>
             </div>
           </Reveal>
         </div>

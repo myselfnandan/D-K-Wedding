@@ -16,7 +16,6 @@ export const attractions: Attraction[] = [
   {
     id: 'hoysaleswara',
     name: 'Hoysaleswara Temple',
-    nameKn: 'ಹೊಯ್ಸಳೇಶ್ವರ ದೇವಾಲಯ',
     categories: ['heritage', 'temples', 'family'],
     latitude: 13.213194,
     longitude: 75.995,
@@ -42,7 +41,6 @@ export const attractions: Attraction[] = [
   {
     id: 'kedareshwara',
     name: 'Kedareshwara Temple',
-    nameKn: 'ಕೇದಾರೇಶ್ವರ ದೇವಾಲಯ',
     categories: ['heritage', 'temples'],
     latitude: null,
     longitude: null,
@@ -135,7 +133,6 @@ export const attractions: Attraction[] = [
   {
     id: 'belur',
     name: 'Chennakeshava Temple, Belur',
-    nameKn: 'ಚೆನ್ನಕೇಶವ ದೇವಾಲಯ, ಬೇಲೂರು',
     categories: ['heritage', 'temples', 'family'],
     latitude: 13.16293,
     longitude: 75.860593,

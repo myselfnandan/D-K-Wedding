@@ -28,7 +28,7 @@ function EventCard({ e, index }: { e: WeddingEvent; index: number }) {
           {!e.startDateTime && <span className="tag tag-warn">Time to be confirmed</span>}
         </div>
         <h3 className="display h-md event-title">
-          {e.title} <span className="kn event-kn" lang="kn">{e.titleKn}</span>
+          {e.title}
         </h3>
         <p className="event-when">
           <Clock size={16} aria-hidden="true" /> {timeText(e)}

@@ -14,7 +14,6 @@ export interface WeddingEvent {
   /** Order in the family's invitation. The timeline never reorders, merges or drops events. */
   order: number;
   title: string;
-  titleKn: string;
   /** ISO 8601 with +05:30 offset, or null when the family has not given a time. */
   startDateTime: string | null;
   endDateTime: string | null;
@@ -55,7 +54,6 @@ export interface OpeningHours {
 export interface Attraction {
   id: string;
   name: string;
-  nameKn?: string;
   categories: AttractionCategory[];
   latitude: number | null;
   longitude: number | null;

@@ -1,38 +1,115 @@
-.hero {
+/* Opening film: a tall scroll track with a sticky 100svh stage. No overflow on the section, or sticky breaks. */
+.hero-film {
   position: relative;
-  min-height: 100svh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 300svh;
   isolation: isolate;
 }
-.hero-scene {
+.hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.hero-poster,
+.hero-poster img,
+.hero-canvas {
   position: absolute;
   inset: 0;
-  z-index: -1;
-  transform-origin: 50% 100%;
-}
-.scene-svg {
   width: 100%;
   height: 100%;
 }
-.hero-vignette {
+.hero-poster img {
+  object-fit: cover;
+  display: block;
+}
+.hero-canvas {
+  display: block;
+}
+/* Indigo (--ink) gradients. The title shade keeps the title block at ≥ 4.5:1 over the poster and fades out with it;
+   the base shade stays for the captions and the nav. */
+.hero-shade,
+.hero-shade-base {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 38%, rgba(13, 16, 48, 0) 30%, rgba(13, 16, 48, 0.55) 100%);
   pointer-events: none;
 }
-.hero-content {
+.hero-shade {
+  background: linear-gradient(to top, rgba(22, 26, 53, 0.9) 0%, rgba(22, 26, 53, 0.84) 55%, rgba(22, 26, 53, 0.74) 70%, rgba(22, 26, 53, 0) 94%);
+}
+.hero-shade-base {
+  background:
+    linear-gradient(to top, rgba(22, 26, 53, 0.7) 0%, rgba(22, 26, 53, 0.35) 30%, rgba(22, 26, 53, 0) 50%),
+    linear-gradient(to bottom, rgba(22, 26, 53, 0.45) 0%, rgba(22, 26, 53, 0) 18%);
+}
+.hero-darken,
+.hero-dissolve {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-darken {
+  background: var(--ink);
+}
+/* The last few percent hand over to the Invitation section's background. */
+.hero-dissolve {
+  inset: auto 0 0;
+  height: 28svh;
+  background: linear-gradient(to bottom, rgba(22, 26, 53, 0), var(--cloud));
+}
+/* Centred with margins, not translateX: motion's `y` owns the transform. */
+.hero-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18svh;
+  max-width: min(92vw, 900px);
+  margin: 0 auto;
+  text-align: center;
+  font-size: clamp(30px, 5.2vw, 64px);
+  line-height: 1.1;
+  color: var(--on-dark);
+  text-shadow: 0 2px 30px rgba(13, 16, 48, 0.75);
+  pointer-events: none;
+}
+/* Two classes so `.wrap`'s `padding: 0 var(--gutter)` (loaded later) can't erase the vertical padding. */
+.hero-stage .hero-content {
+  position: relative;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 92px;
-  padding-bottom: 150px;
+  padding-bottom: 120px;
+}
+.hero-static {
+  height: auto;
+}
+.hero-static .hero-stage {
+  position: relative;
+  height: auto;
+  min-height: 100svh;
+}
+.hero-static .hero-stage .hero-content {
+  padding-bottom: 72px;
+}
+@media (max-aspect-ratio: 799/1000) {
+  .hero-film:not(.hero-static) {
+    height: 240svh;
+  }
+}
+
+.scene-svg {
+  width: 100%;
+  height: 100%;
 }
 .hero-kicker {
-  font-size: 18px;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 20px;
+  letter-spacing: 0.04em;
   color: var(--iris);
   margin: 0 0 8px;
 }
@@ -54,11 +131,6 @@
   display: inline-block;
   color: var(--iris);
   font-size: 0.72em;
-}
-.hero-names-kn {
-  font-size: clamp(18px, 2vw, 22px);
-  color: var(--on-dark-muted);
-  margin: 18px 0 0;
 }
 .hero-meta {
   margin-top: 30px;
@@ -159,8 +231,11 @@
     width: 100%;
     max-width: 360px;
   }
-  .hero-content { padding-bottom: 120px; }
+  .hero-stage .hero-content { padding-bottom: 96px; }
 }
 @media (max-height: 700px) {
   .scroll-cue { display: none; }
+  .hero-stage .hero-content { padding-top: 72px; padding-bottom: 32px; }
+  .countdown { margin-top: 20px; }
+  .hero-meta { margin-top: 18px; }
 }

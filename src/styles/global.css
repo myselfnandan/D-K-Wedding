@@ -4,8 +4,6 @@
 @import '@fontsource/manrope/400.css';
 @import '@fontsource/manrope/500.css';
 @import '@fontsource/manrope/600.css';
-@import '@fontsource/noto-serif-kannada/400.css';
-@import '@fontsource/noto-serif-kannada/500.css';
 
 :root {
   /* Palette — mist blue + periwinkle, anchored by a night indigo */
@@ -28,7 +26,6 @@
 
   --f-display: 'Cormorant Garamond', 'Times New Roman', serif;
   --f-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --f-kn: 'Noto Serif Kannada', 'Tunga', serif;
 
   --r-sm: 6px;
   --r-md: 14px;
@@ -168,11 +165,6 @@ button {
 }
 .italic {
   font-style: italic;
-}
-.kn {
-  font-family: var(--f-kn);
-  font-weight: 400;
-  letter-spacing: 0;
 }
 .lede {
   font-size: clamp(16px, 1.4vw, 19px);

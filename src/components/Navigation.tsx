@@ -114,8 +114,8 @@ export function Navigation() {
                 </motion.li>
               ))}
             </ul>
-            <p className="kn menu-foot" lang="kn">
-              ದಿಲೀಪ್ · ಕಾವ್ಯ · 03-12-2026
+            <p className="menu-foot">
+              Dileep · Kavya · 03-12-2026
             </p>
           </motion.div>
         )}

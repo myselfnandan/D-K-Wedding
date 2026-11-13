@@ -19,7 +19,6 @@ export function GuestInformation() {
             <MapPin size={20} aria-hidden="true" />
             <h3 className="display h-sm">Venue</h3>
             <p><strong>{VENUE.hall}</strong></p>
-            <p className="kn muted small" lang="kn">{VENUE.hallKn}, {VENUE.addressKn}</p>
             <p className="muted">{VENUE.address}</p>
             <a className="btn btn-primary btn-sm" href={VENUE.directionsUrl} target="_blank" rel="noreferrer">Navigate to the venue</a>
           </Reveal>

@@ -1,0 +1,63 @@
+PASS  [desktop] frame set chosen
+      kind=desktop
+PASS  [desktop] canvas frames differ by scroll position
+      frame@0.1=12 frame@0.5=59 frame@0.9=107; mean |Δ| 0.1→0.5=67.7, 0.5→0.9=49.2
+PASS  [desktop] scrolling back rewinds
+      frame back@0.1=12; mean |Δ| vs first visit=0.00
+PASS  [desktop] forward scrub covers the film
+      {"draws":119,"distinct":119,"first":1,"last":119,"reversals":0,"maxJump":1}
+PASS  [desktop] backward scrub rewinds to frame 0
+      {"draws":119,"distinct":119,"first":118,"last":0,"reversals":0,"maxJump":1}
+PASS  [desktop] bitmap window capped after 2 full scrubs
+      JS heap used=7.6 MB (total 8.7 MB); live ImageBitmaps=24 (cap 24); decoded <img>=120
+PASS  [mobile] frame set chosen
+      kind=mobile
+PASS  [mobile] canvas frames differ by scroll position
+      frame@0.1=12 frame@0.5=59 frame@0.9=107; mean |Δ| 0.1→0.5=63.5, 0.5→0.9=43.5
+PASS  [mobile] scrolling back rewinds
+      frame back@0.1=12; mean |Δ| vs first visit=0.00
+PASS  [mobile] forward scrub covers the film
+      {"draws":119,"distinct":119,"first":1,"last":119,"reversals":0,"maxJump":1}
+PASS  [mobile] backward scrub rewinds to frame 0
+      {"draws":119,"distinct":119,"first":118,"last":0,"reversals":0,"maxJump":1}
+PASS  [mobile] bitmap window capped after 2 full scrubs
+      JS heap used=7.7 MB (total 8.7 MB); live ImageBitmaps=16 (cap 16); decoded <img>=120
+PASS  [desktop] poster painted without any frame
+      {"complete":true,"src":"frames/desktop/poster.avif","fp":"high","loading":"eager","frameDrawn":null}
+PASS  [desktop] title text contrast ≥ 4.5:1 over the poster
+      .hero-kicker 6.24:1, .hero-content .eyebrow 6.18:1, .hero-names 10.83:1, .hero-meta 12.41:1, .hero-venue 8.01:1, .cd-label 8.29:1
+PASS  [mobile] poster painted without any frame
+      {"complete":true,"src":"frames/mobile/poster.avif","fp":"high","loading":"eager","frameDrawn":null}
+PASS  [mobile] title text contrast ≥ 4.5:1 over the poster
+      .hero-kicker 6.27:1, .hero-content .eyebrow 6.43:1, .hero-names 10.07:1, .hero-meta 11.99:1, .hero-venue 7.95:1, .cd-label 8.50:1
+PASS  [desktop] reduced motion: static hero, ≤ 2 frame requests
+      /frames/ requests=1 [desktop/poster.avif]; {"canvas":false,"video":false,"height":900,"vh":900,"cls":"hero-film hero-static dark"}
+PASS  [mobile] reduced motion: static hero, ≤ 2 frame requests
+      /frames/ requests=1 [mobile/poster.avif]; {"canvas":false,"video":false,"height":844,"vh":844,"cls":"hero-film hero-static dark"}
+PASS  [360px] no horizontal overflow
+      html scrollWidth − innerWidth=0px; max scrollX after scrollTo(500,·)=0; clipped body excess (info)=58px; <video>=0
+PASS  [390px] no horizontal overflow
+      html scrollWidth − innerWidth=0px; max scrollX after scrollTo(500,·)=0; clipped body excess (info)=58px; <video>=0
+PASS  [768px] no horizontal overflow
+      html scrollWidth − innerWidth=0px; max scrollX after scrollTo(500,·)=0; clipped body excess (info)=37px; <video>=0
+PASS  [1440px] no horizontal overflow
+      html scrollWidth − innerWidth=0px; max scrollX after scrollTo(500,·)=0; clipped body excess (info)=0px; <video>=0
+PASS  nav link scrolls to its section
+      #celebrations top after click=80px
+PASS  "Back to top" returns to the hero
+      scrollY=0
+PASS  hero RSVP button jumps to #rsvp
+      #rsvp top=80px
+PASS  calendar download
+      file=devatha-karya-dileep-kavya.ics
+PASS  planner: window tab + interest chip
+      tabs=4, last tab aria-selected=true, chip aria-pressed=true
+PASS  filters change the place count
+      13 places → 7 places → 3 places
+PASS  RSVP opens the WhatsApp link
+      window.open → https://wa.me/919980450419?text=RSVP%20%E2%80%94%20Dileep%20…; info link=https://wa.me/919980450419
+PASS  footer carries the Gemini disclosure
+PASS  mobile menu opens, navigates and closes
+      dialog=true, footer="Dileep · Kavya · 03-12-2026", body overflow open/after="hidden"/"", #discover top=80px
+
+31/31 checks passed

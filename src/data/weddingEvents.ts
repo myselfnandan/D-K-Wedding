@@ -11,14 +11,13 @@ export const weddingEvents: WeddingEvent[] = [
     id: 'devatha-karya',
     order: 1,
     title: 'Devatha Karya',
-    titleKn: 'ದೇವತಾಕಾರ್ಯ',
     date: '2026-12-01',
     startDateTime: null, // not given in the invitation
     endDateTime: null,
     assumedEndDateTime: null,
     description:
       'Prayers to the family deities that open the wedding celebrations, held at the groom’s home.',
-    location: 'Groom’s residence (ವರನ ಸ್ವಗೃಹದಲ್ಲಿ)',
+    location: 'Groom’s residence',
     place: 'groom-home',
     priority: 'high',
     image: null,
@@ -31,7 +30,6 @@ export const weddingEvents: WeddingEvent[] = [
     id: 'muhurtha',
     order: 2,
     title: 'Muhurtha',
-    titleKn: 'ಮುಹೂರ್ತ',
     date: '2026-12-03',
     startDateTime: '2026-12-03T08:30:00+05:30',
     endDateTime: '2026-12-03T09:30:00+05:30',
@@ -46,7 +44,7 @@ export const weddingEvents: WeddingEvent[] = [
     mapUrl: VENUE.mapUrl,
     instructions: ['Please be seated a little before 8:30 am.'],
     details: [
-      { label: 'Lagna', value: 'Dhanu (ಧನು)' },
+      { label: 'Lagna', value: 'Dhanu' },
       { label: 'Day', value: 'Thursday, 3 December 2026' },
     ],
   },
@@ -54,7 +52,6 @@ export const weddingEvents: WeddingEvent[] = [
     id: 'aaratakshate',
     order: 3,
     title: 'Aaratakshate',
-    titleKn: 'ಆರತಕ್ಷತೆ',
     date: '2026-12-03',
     startDateTime: '2026-12-03T11:30:00+05:30',
     endDateTime: null, // invitation says "from 11:30"
@@ -73,7 +70,6 @@ export const weddingEvents: WeddingEvent[] = [
     id: 'bhojana',
     order: 4,
     title: 'Bhojana',
-    titleKn: 'ಭೋಜನ',
     date: '2026-12-03',
     startDateTime: '2026-12-03T12:30:00+05:30',
     endDateTime: null, // invitation says "from 12:30"

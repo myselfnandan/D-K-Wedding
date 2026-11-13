@@ -13,7 +13,7 @@ export function Closing() {
       </div>
       <div className="wrap closing-copy">
         <Reveal>
-          <p className="kn closing-kn" lang="kn">ತಮ್ಮ ಆಗಮನಾಭಿಲಾಷಿಗಳು</p>
+          <p className="closing-kicker">Awaiting your arrival</p>
         </Reveal>
         <Reveal delay={0.1}>
           <h2 id="closing-title" className="display h-xl">
@@ -61,6 +61,7 @@ export function Footer() {
           </details>
         )}
         <p className="small muted">Illustrations drawn for this invitation.</p>
+        <p className="small muted">Opening film generated with Google Gemini.</p>
       </div>
     </footer>
   );
