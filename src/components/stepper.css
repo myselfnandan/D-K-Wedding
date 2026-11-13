@@ -1,0 +1,56 @@
+.pick {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: 0 12px 28px -22px rgba(22, 26, 53, 0.5);
+}
+.pick-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 0;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--on-dark);
+  cursor: pointer;
+}
+.pick-btn:active {
+  transform: scale(0.94);
+}
+.pick-current {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  overflow: hidden;
+  text-align: center;
+}
+.pick-item {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.25;
+  color: var(--text);
+}
+.pick-item > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pick-count {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}

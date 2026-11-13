@@ -141,7 +141,6 @@ export function RSVPSection() {
                 <label>
                   <span>Arriving</span>
                   <select value={arrival} onChange={(e) => setArrival(e.target.value)}>
-                    <option>Tue 1 Dec</option>
                     <option>Wed 2 Dec</option>
                     <option>Thu 3 Dec morning</option>
                   </select>

@@ -1,1 +1,156 @@
-{}
+{
+  "hero": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.778
+  },
+  "hoysaleswara": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.333
+  },
+  "hoysaleswara-carving": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.333
+  },
+  "makara": {
+    "widths": [
+      640
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.109
+  },
+  "kedareshwara": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.51
+  },
+  "basadi": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.778
+  },
+  "belur": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.333
+  },
+  "belavadi": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.502
+  },
+  "doddagaddavalli": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.502
+  },
+  "yagachi": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.333
+  },
+  "manjarabad": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.333
+  },
+  "mullayanagiri": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.504
+  },
+  "coffee": {
+    "widths": [
+      640,
+      1280,
+      1920
+    ],
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "ratio": 1.336
+  }
+}

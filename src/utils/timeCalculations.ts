@@ -1,3 +1,5 @@
+import type { WeddingEvent } from '../data/types';
+
 /** All wedding times are Indian Standard Time (UTC+05:30, no DST). */
 export const IST_OFFSET_MIN = 330;
 export const MIN = 60_000;
@@ -75,4 +77,12 @@ export function countdown(target: number, now: number) {
     minutes: Math.floor((s % 3600) / 60),
     seconds: s % 60,
   };
+}
+
+/** One wording for an event's time, shared by the hero programme and the timeline. */
+export function eventTimeText(e: Pick<WeddingEvent, 'startDateTime' | 'endDateTime' | 'timeOfDay'>) {
+  if (!e.startDateTime) return e.timeOfDay ?? 'Time to be confirmed';
+  const s = formatTime(toMs(e.startDateTime));
+  if (e.endDateTime) return `${s} – ${formatTime(toMs(e.endDateTime))}`;
+  return `From ${s}`;
 }

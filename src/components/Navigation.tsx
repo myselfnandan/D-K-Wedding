@@ -4,10 +4,8 @@ import { useEffect, useState } from 'react';
 
 export const NAV_ITEMS = [
   { id: 'invitation', label: 'Invitation' },
-  { id: 'story', label: 'Story' },
   { id: 'celebrations', label: 'Celebrations' },
   { id: 'explore', label: 'Explore' },
-  { id: 'discover', label: 'Discover' },
   { id: 'travel', label: 'Travel' },
   { id: 'info', label: 'Guest info' },
 ];

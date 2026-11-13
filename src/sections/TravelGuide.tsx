@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Car, Navigation2, Plane, TrainFront } from 'lucide-react';
 import { useState } from 'react';
 import { Reveal } from '../components/Reveal';
+import { Stepper } from '../components/Stepper';
 import { VENUE } from '../data/guestInfo';
 import { travelRoutes } from '../data/travelRoutes';
 import { formatDuration } from '../utils/timeCalculations';
@@ -51,6 +52,19 @@ export function TravelGuide() {
               );
             })}
           </div>
+          {/* Phones: one starting point at a time with back / forward, so no option hides off-screen. */}
+          <Stepper
+            className="travel-stepper"
+            index={travelRoutes.findIndex((x) => x.id === sel)}
+            count={travelRoutes.length}
+            onChange={(i) => setSel(travelRoutes[i].id)}
+            label="Choose where you are starting from"
+            noun="starting point"
+          >
+            <Icon size={16} aria-hidden="true" />
+            <span>{r.from}</span>
+            <span className="muted small">{formatDuration(r.driveMinutes.value)}</span>
+          </Stepper>
           <div id="travel-panel" role="tabpanel" aria-labelledby={`tab-${r.id}`} className="travel-panel card">
             <AnimatePresence mode="wait">
               <motion.div

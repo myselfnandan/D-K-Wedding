@@ -7,7 +7,7 @@ export interface Sourced<T> {
 }
 
 export type EventPriority = 'critical' | 'high' | 'normal';
-export type EventPlace = 'venue' | 'groom-home';
+export type EventPlace = 'venue';
 
 export interface WeddingEvent {
   id: string;
@@ -17,6 +17,8 @@ export interface WeddingEvent {
   /** ISO 8601 with +05:30 offset, or null when the family has not given a time. */
   startDateTime: string | null;
   endDateTime: string | null;
+  /** Shown instead of a clock time when only the part of the day is known (e.g. "Evening"). */
+  timeOfDay?: string;
   /** Used ONLY by the planner when endDateTime is null. Always shown to guests as an assumption. */
   assumedEndDateTime: string | null;
   /** Calendar date (YYYY-MM-DD) — always known. */

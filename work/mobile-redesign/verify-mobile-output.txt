@@ -1,0 +1,60 @@
+PASS  [390x844] hero panel "opening" readable and usable
+      opacity=1 inert=false other panels max opacity=0; content top=202px (nav pill ends ~64) bottom=844/844; missing=[]; links/buttons=2 blocked=[]
+PASS  [390x844] hero panel "opening" contrast meets WCAG AA over the film
+      12 text boxes; tightest "Together with their families" 6.97:1 (needs 4.5:1); median 11.61:1
+PASS  [390x844] hero panel "families" readable and usable
+      opacity=1 inert=false other panels max opacity=0; content top=578px (nav pill ends ~64) bottom=844/844; missing=[]; links/buttons=0 blocked=[]
+PASS  [390x844] hero panel "families" contrast meets WCAG AA over the film
+      6 text boxes; tightest "The invitation" 8.64:1 (needs 4.5:1); median 11.84:1
+PASS  [390x844] hero panel "programme" readable and usable
+      opacity=1 inert=false other panels max opacity=0; content top=376px (nav pill ends ~64) bottom=844/844; missing=[]; links/buttons=1 blocked=[]
+PASS  [390x844] hero panel "programme" contrast meets WCAG AA over the film
+      11 text boxes; tightest "Thu 3 Dec · From 12:30 pm" 7.01:1 (needs 4.5:1); median 9.85:1
+PASS  [390x844] hero panel "venue" readable and usable
+      opacity=1 inert=false other panels max opacity=0; content top=492px (nav pill ends ~64) bottom=844/844; missing=[]; links/buttons=2 blocked=[]
+PASS  [390x844] hero panel "venue" contrast meets WCAG AA over the film
+      5 text boxes; tightest "The venue" 8.99:1 (needs 4.5:1); median 9.18:1
+PASS  [360x740] hero panel "opening" readable and usable
+      opacity=1 inert=false other panels max opacity=0; content top=112px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=2 blocked=[]
+PASS  [360x740] hero panel "opening" contrast meets WCAG AA over the film
+      12 text boxes; tightest "Shri Kshetra Pushpagiri Maha" 8.45:1 (needs 4.5:1); median 11.45:1
+PASS  [360x740] hero panel "families" readable and usable
+      opacity=1 inert=false other panels max opacity=0; content top=476px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=0 blocked=[]
+PASS  [360x740] hero panel "families" contrast meets WCAG AA over the film
+      6 text boxes; tightest "The invitation" 5.94:1 (needs 4.5:1); median 11.70:1
+PASS  [360x740] hero panel "programme" readable and usable
+      opacity=1 inert=false other panels max opacity=0; content top=272px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=1 blocked=[]
+PASS  [360x740] hero panel "programme" contrast meets WCAG AA over the film
+      11 text boxes; tightest "Wed 2 Dec · Evening" 7.43:1 (needs 4.5:1); median 9.76:1
+PASS  [360x740] hero panel "venue" readable and usable
+      opacity=1 inert=false other panels max opacity=0; content top=390px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=2 blocked=[]
+PASS  [360x740] hero panel "venue" contrast meets WCAG AA over the film
+      5 text boxes; tightest "Halebeedu, Belur Taluk, Hass" 7.93:1 (needs 4.5:1); median 8.92:1
+PASS  page height at 390×844 ≤ 18,000 px
+      scrollHeight=11558px (before: 31,238px)
+PASS  no screen without visible text (390×844, 80% steps)
+      18 steps; empty at y=[]
+PASS  closing: copy clear of the illustration, contrast ≥ 4.5:1
+      copy bottom=281 scene top=281; lowest "Awaiting your arrival" 7.65:1
+PASS  [390x844] reduced motion: all panel content stacked, ≤ 2 frame requests
+      missing=[] canvas=false anchors=true; /frames/ requests=1 [mobile/poster.avif]
+PASS  [360x740] reduced motion: all panel content stacked, ≤ 2 frame requests
+      missing=[] canvas=false anchors=true; /frames/ requests=1 [mobile/poster.avif]
+PASS  [390x844] explore: one option at a time with back / forward
+      stepper display=grid, old strip display=none; 1 of 13 "Jain Basadis, Basadi Halli" → next 2 of 13 "Hoysaleswara Temple" → back 1 of 13 → back (wraps) 13 of 13; stepper x=16..374
+PASS  [390x844] travel: one option at a time with back / forward
+      stepper display=grid, old strip display=none; 1 of 9 " FROM BENGALURU" → next 2 of 9 " FROM MYSURU" → back 1 of 9 → back (wraps) 9 of 9; stepper x=16..374
+PASS  [360x740] explore: one option at a time with back / forward
+      stepper display=grid, old strip display=none; 1 of 13 "Jain Basadis, Basadi Halli" → next 2 of 13 "Hoysaleswara Temple" → back 1 of 13 → back (wraps) 13 of 13; stepper x=16..344
+PASS  [360x740] travel: one option at a time with back / forward
+      stepper display=grid, old strip display=none; 1 of 9 " FROM BENGALURU" → next 2 of 9 " FROM MYSURU" → back 1 of 9 → back (wraps) 9 of 9; stepper x=16..344
+PASS  phones show no top bar
+      floating nav display=none, progress bar display=none
+PASS  no "Scroll to unfold" cue
+      {"el":false,"text":false}
+PASS  no individual names besides the couple
+      found=[]
+PASS  animations replay when a section comes back on screen
+      card text opacity: first view=1, scrolled away=0, just back=0.894385, settled=1; taali knot width just back=0px, settled=11.1px
+
+29/29 checks passed

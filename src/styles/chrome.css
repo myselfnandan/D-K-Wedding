@@ -186,3 +186,11 @@
   margin-top: 32px;
   color: var(--on-dark-muted);
 }
+
+/* Phones: no top bar (the owner wants the screen clear); sections are reached by scrolling. */
+@media (max-width: 760px) {
+  .floating-nav,
+  .progress-bar {
+    display: none;
+  }
+}

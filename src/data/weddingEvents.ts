@@ -2,29 +2,33 @@ import type { WeddingEvent } from './types';
 import { VENUE } from './guestInfo';
 
 /**
- * MASTER TIMELINE — source: "Dileep & Kavya V7.0 Content for 900 Invitations" (family PDF).
+ * MASTER TIMELINE — source: "Dileep & Kavya V7.0 Content for 900 Invitations" (family PDF),
+ * updated by the family on 14 Nov 2026: Haladhi on the evening of 2 December opens the celebrations.
  * Never merge, drop, rename or reorder these. Unknown values stay null.
  * When the family confirms a time, fill startDateTime/endDateTime and the planner recalculates.
  */
 export const weddingEvents: WeddingEvent[] = [
   {
-    id: 'devatha-karya',
+    id: 'haladhi',
     order: 1,
-    title: 'Devatha Karya',
-    date: '2026-12-01',
-    startDateTime: null, // not given in the invitation
+    title: 'Haladhi',
+    date: '2026-12-02',
+    startDateTime: null, // the family has said "evening"; exact time not given yet
     endDateTime: null,
+    timeOfDay: 'Evening',
     assumedEndDateTime: null,
-    description:
-      'Prayers to the family deities that open the wedding celebrations, held at the groom’s home.',
-    location: 'Groom’s residence',
-    place: 'groom-home',
+    description: 'The haladhi ceremony, on the evening before the wedding.',
+    location: VENUE.hall,
+    place: 'venue',
     priority: 'high',
     image: null,
     dressCode: null,
-    mapUrl: null,
-    instructions: ['Time to be confirmed by the family.'],
-    details: [{ label: 'Day', value: 'Tuesday, 1 December 2026' }],
+    mapUrl: VENUE.mapUrl,
+    instructions: ['Exact time to be confirmed by the family.'],
+    details: [
+      { label: 'Day', value: 'Wednesday, 2 December 2026' },
+      { label: 'Time', value: 'Evening' },
+    ],
   },
   {
     id: 'muhurtha',
@@ -34,8 +38,7 @@ export const weddingEvents: WeddingEvent[] = [
     startDateTime: '2026-12-03T08:30:00+05:30',
     endDateTime: '2026-12-03T09:30:00+05:30',
     assumedEndDateTime: null,
-    description:
-      'The auspicious hour of the wedding, in Dhanu lagna. The moment the family gathers for.',
+    description: 'The wedding ceremony.',
     location: VENUE.hall,
     place: 'venue',
     priority: 'critical',
@@ -56,7 +59,7 @@ export const weddingEvents: WeddingEvent[] = [
     startDateTime: '2026-12-03T11:30:00+05:30',
     endDateTime: null, // invitation says "from 11:30"
     assumedEndDateTime: '2026-12-03T14:30:00+05:30',
-    description: 'The reception — bless the couple and celebrate with both families.',
+    description: 'The reception.',
     location: VENUE.hall,
     place: 'venue',
     priority: 'high',

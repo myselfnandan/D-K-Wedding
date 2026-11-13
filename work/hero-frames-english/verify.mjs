@@ -192,17 +192,22 @@ for (const [label, opts] of Object.entries(VIEWPORTS)) {
     ['.hero-kicker', '.hero-content .eyebrow', '.hero-names', '.hero-meta', '.hero-venue', '.cd-label'].map((sel) => {
       const el = document.querySelector(sel);
       const r = el.getBoundingClientRect();
-      const c = getComputedStyle(el).color.match(/\d+/g).map(Number);
-      return { sel, x: r.x, y: r.y, w: r.width, h: r.height, color: c };
+      const cs = getComputedStyle(el);
+      const c = cs.color.match(/\d+/g).map(Number);
+      // WCAG AA: 3:1 for large text (≥ 24px, or ≥ 18.66px bold), 4.5:1 otherwise.
+      const px = parseFloat(cs.fontSize);
+      const need = px >= 24 || (px >= 18.66 && +cs.fontWeight >= 700) ? 3 : 4.5;
+      return { sel, need, x: r.x, y: r.y, w: r.width, h: r.height, color: c };
     }),
   );
-  await page.addStyleTag({ content: '.hero-content, .scroll-cue { visibility: hidden !important; }' });
+  // Hide only the glyphs; keep the shades and halo that really sit behind the text.
+  await page.addStyleTag({ content: '.hero-content, .hero-content *, .scroll-cue, .scroll-cue * { color: transparent !important; text-shadow: none !important; } .scroll-line { visibility: hidden !important; }' });
   await sleep(100);
   const bg = await page.screenshot();
   const { data, info } = await sharp(bg).raw().toBuffer({ resolveWithObject: true });
   const dpr = info.width / width;
   const lines = [];
-  let worst = Infinity;
+  let failing = 0;
   for (const b of boxes) {
     const ls = [];
     for (let y = Math.floor(b.y * dpr); y < (b.y + b.h) * dpr; y += 2)
@@ -213,10 +218,10 @@ for (const [label, opts] of Object.entries(VIEWPORTS)) {
     ls.sort((a, b) => a - b);
     const p98 = ls[Math.floor(ls.length * 0.98)];
     const cr = ratio(lum(...b.color), p98);
-    worst = Math.min(worst, cr);
-    lines.push(`${b.sel} ${cr.toFixed(2)}:1`);
+    if (cr < b.need) failing++;
+    lines.push(`${b.sel} ${cr.toFixed(2)}:1 (needs ${b.need})`);
   }
-  record(`[${label}] title text contrast ≥ 4.5:1 over the poster`, worst >= 4.5, lines.join(', '));
+  record(`[${label}] title text contrast meets WCAG AA over the poster`, failing === 0, lines.join(', '));
   await ctx.close();
 }
 
@@ -236,7 +241,8 @@ for (const [label, opts] of Object.entries(VIEWPORTS)) {
   await sleep(1000);
   const shape = await page.evaluate(() => {
     const s = document.getElementById('welcome');
-    return { canvas: !!document.querySelector('canvas'), video: !!document.querySelector('video'), height: s.offsetHeight, vh: innerHeight, cls: s.className };
+    // Since mobile-redesign the static hero is one poster screen followed by the stacked panels; the stage is what must stay one screen.
+    return { canvas: !!document.querySelector('canvas'), video: !!document.querySelector('video'), height: s.querySelector('.hero-stage').offsetHeight, vh: innerHeight, cls: s.className };
   });
   await page.screenshot({ path: `${OUT}/${opts.viewport.width}x${opts.viewport.height}-reduced-motion.png` });
   record(
@@ -303,34 +309,29 @@ for (const w of [360, 390, 768, 1440]) {
 
   // Calendar download.
   await page.locator('#celebrations').scrollIntoViewIfNeeded();
-  await page.locator('#celebrations .event-toggle').first().click();
   const dlP = page.waitForEvent('download', { timeout: 5000 });
-  await page.locator('#celebrations button:has-text("Add to calendar")').first().click();
+  // Since the celebrations redesign the calendar button sits directly on each card.
+  await page.locator('#celebrations .moment button:has-text("Add to calendar")').first().click();
   const dl = await dlP.catch(() => null);
   record('calendar download', !!dl && dl.suggestedFilename().endsWith('.ics'), `file=${dl?.suggestedFilename()}`);
 
-  // Planner: switch free window and an interest chip.
-  await page.locator('#explore').scrollIntoViewIfNeeded();
-  const tabs = page.locator('#explore .window-btn');
-  const nTabs = await tabs.count();
-  await tabs.nth(nTabs - 1).click();
-  const sel = await tabs.nth(nTabs - 1).getAttribute('aria-selected');
-  const chip = page.locator('#explore .planner-controls .chip').nth(1);
-  await chip.click();
-  const pressed = await chip.getAttribute('aria-pressed');
-  record('planner: window tab + interest chip', sel === 'true' && pressed === 'true', `tabs=${nTabs}, last tab aria-selected=${sel}, chip aria-pressed=${pressed}`);
-
-  // Filters: category and distance change the result count.
-  await page.locator('#discover').scrollIntoViewIfNeeded();
-  const count = () => page.locator('#discover .result-count').innerText();
-  const before = await count();
-  await page.locator('#discover [aria-label="Filter by category"] .chip').nth(1).click();
-  await sleep(500);
-  const afterCat = await count();
-  await page.locator('#discover [aria-label="Filter by distance"] .chip').nth(1).click();
-  await sleep(500);
-  const afterBand = await count();
-  record('filters change the place count', before !== afterCat || afterCat !== afterBand, `${before} → ${afterCat} → ${afterBand}`);
+  // Explore map (replaced the planner and filters): 13 pins; a pin and a list chip each select a place.
+  await page.locator('#explore .pm-frame').scrollIntoViewIfNeeded();
+  await sleep(2500); // pins pop in
+  const nPins = await page.locator('#explore .pm-pin').count();
+  await page.locator('#explore .pm-pin[aria-label^="12."]').click();
+  await sleep(700);
+  const viaPin = await page.locator('#explore .pm-card h3').innerText();
+  const pinPressed = await page.locator('#explore .pm-pin[aria-label^="12."]').getAttribute('aria-pressed');
+  await page.locator('#explore .pm-chip').nth(4).click();
+  await sleep(700);
+  const viaChip = await page.locator('#explore .pm-card h3').innerText();
+  const dirHref = await page.locator('#explore .pm-card a.btn').getAttribute('href');
+  record(
+    'explore map: pin and list select a place',
+    nPins === 13 && pinPressed === 'true' && viaPin === 'Hebbe Falls' && viaChip === 'Lakshmi Devi Temple, Doddagaddavalli' && dirHref.startsWith('https://www.google.com/maps/dir/'),
+    `pins=${nPins}; pin 12 → "${viaPin}" (aria-pressed=${pinPressed}); chip 5 → "${viaChip}"; directions=${dirHref.slice(0, 45)}…`,
+  );
 
   // RSVP form opens WhatsApp with the right number.
   await page.locator('#rsvp').scrollIntoViewIfNeeded();
@@ -346,11 +347,16 @@ for (const w of [360, 390, 768, 1440]) {
     `window.open → ${opened[0]?.slice(0, 60)}…; info link=${waHref}`,
   );
   const footer = await page.locator('footer').innerText();
-  record('footer carries the Gemini disclosure', footer.includes('Opening film generated with Google Gemini.'));
+  // Owner asked (14 Nov 2026) to drop the credits list, the illustrations line and the Gemini line from the footer.
+  // The CC photo credits now sit on each photo instead.
+  const gone = ['Photo credits', 'Illustrations drawn', 'Google Gemini'].filter((t) => footer.includes(t));
+  const credits = await page.$$eval('.photo-credit', (a) => a.map((x) => x.textContent));
+  record('footer lines removed; photos carry their own credit', gone.length === 0 && credits.length > 0 && credits.every((c) => /^Photo: .+, (CC|Public)/.test(c)), `still in footer=[${gone.join(', ')}]; on-photo credits=${credits.length} e.g. "${credits[0]}"`);
   await ctx.close();
 }
 {
-  const { ctx, page } = await open(VIEWPORTS.mobile);
+  // The top bar is hidden on phones (owner request); the menu still exists from tablet width, so test it there.
+  const { ctx, page } = await open({ viewport: { width: 820, height: 1180 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
   await page.evaluate(() => window.scrollTo(0, innerHeight * 3));
   await sleep(800);
   await page.click('.nav-burger');
@@ -358,16 +364,16 @@ for (const w of [360, 390, 768, 1440]) {
   const dialog = await page.locator('.menu-sheet[role="dialog"]').isVisible();
   const foot = await page.locator('.menu-foot').innerText();
   const lockedOpen = await page.evaluate(() => document.body.style.overflow);
-  await page.screenshot({ path: `${OUT}/390x844-menu-open.png` });
-  await page.click('.menu-sheet a[href="#discover"]');
+  await page.screenshot({ path: `${OUT}/820x1180-menu-open.png` });
+  await page.click('.menu-sheet a[href="#explore"]');
   await sleep(1800);
   const closed = await page.locator('.menu-sheet').count();
-  const top = await page.evaluate(() => Math.round(document.getElementById('discover').getBoundingClientRect().top));
+  const top = await page.evaluate(() => Math.round(document.getElementById('explore').getBoundingClientRect().top));
   const lockedAfter = await page.evaluate(() => document.body.style.overflow);
   record(
     'mobile menu opens, navigates and closes',
     dialog && closed === 0 && Math.abs(top) < 140 && lockedOpen === 'hidden' && lockedAfter === '' && foot === 'Dileep · Kavya · 03-12-2026',
-    `dialog=${dialog}, footer="${foot}", body overflow open/after="${lockedOpen}"/"${lockedAfter}", #discover top=${top}px`,
+    `dialog=${dialog}, footer="${foot}", body overflow open/after="${lockedOpen}"/"${lockedAfter}", #explore top=${top}px`,
   );
   await ctx.close();
 }

@@ -4,13 +4,10 @@ import { Navigation } from './components/Navigation';
 import { Preloader } from './components/Preloader';
 import { useFrameSequence } from './hooks/useFrameSequence';
 import { Closing, Footer } from './sections/Closing';
-import { DestinationExplorer } from './sections/DestinationExplorer';
 import { GuestInformation, RSVPSection } from './sections/GuestInformation';
 import { HeroFilm } from './sections/HeroFilm';
-import { InvitationSection } from './sections/InvitationSection';
 import { LocalFoodGuide } from './sections/LocalFoodGuide';
-import { SmartItinerary } from './sections/SmartItinerary';
-import { StoryFilm } from './sections/StoryFilm';
+import { PlacesMap } from './sections/PlacesMap';
 import { TravelGuide } from './sections/TravelGuide';
 import { WeddingTimeline } from './sections/WeddingTimeline';
 
@@ -26,11 +23,8 @@ export default function App() {
       <Navigation />
       <HeroFilm ready={ready} store={store} />
       <main>
-        <InvitationSection />
-        <StoryFilm />
         <WeddingTimeline />
-        <SmartItinerary />
-        <DestinationExplorer />
+        <PlacesMap />
         <LocalFoodGuide />
         <TravelGuide />
         <GuestInformation />

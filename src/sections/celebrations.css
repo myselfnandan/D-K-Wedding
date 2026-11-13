@@ -1,0 +1,157 @@
+/* Celebrations: one card per ceremony, each with its own painted splash and small animated illustration. */
+.celebrations {
+  --seam: clamp(96px, 12vw, 160px);
+  background: linear-gradient(180deg, var(--cloud), var(--haze));
+  padding-top: calc(var(--seam) + clamp(40px, 6vw, 80px));
+}
+/* The opening ends in stone grey; this seam carries it into the light section instead of a hard edge. */
+.celebrations::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--seam);
+  background: linear-gradient(180deg, #22201c, rgba(34, 32, 28, 0));
+  pointer-events: none;
+}
+@media (max-width: 560px) {
+  .celebrations {
+    --seam: 72px;
+    padding-top: calc(var(--seam) + 28px);
+  }
+}
+
+.moments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 760px) {
+  .moments {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Per-ceremony palettes */
+.moment-haladhi { --bg: #fffaeb; --deep: #7a4f00; --tint: #fdeeb5; --edge: #f1dc98; }
+.moment-muhurtha { --bg: #fff6f1; --deep: #9b0d24; --tint: #fde0d6; --edge: #f2c6b8; }
+.moment-aaratakshate { --bg: #fff5ee; --deep: #9a3b17; --tint: #fde2cf; --edge: #f3cbb0; }
+.moment-bhojana { --bg: #f4f9ee; --deep: #2a6230; --tint: #dcefcb; --edge: #c6e0ae; }
+
+.moment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--edge);
+  box-shadow: 0 24px 48px -36px rgba(60, 40, 10, 0.45);
+}
+.moment-art {
+  position: relative;
+  height: 150px;
+}
+/* The splash fades into the card, so the content sits on top of it. */
+.moment-art::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  background: linear-gradient(180deg, transparent, var(--bg));
+  pointer-events: none;
+}
+.moment-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.moment-body {
+  position: relative;
+  margin-top: -40px;
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.moment-body p {
+  margin: 0;
+}
+.moment-when {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--deep);
+}
+.moment-title {
+  font-size: clamp(32px, 8vw, 40px);
+  line-height: 1.05;
+  color: #2a1d12;
+}
+.moment-desc {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #4a3a2c;
+}
+.moment-note {
+  align-self: flex-start;
+  margin-top: 4px !important;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--deep);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.moment-actions {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.moment-btn {
+  background: var(--deep);
+  border-color: var(--deep);
+  color: #fff;
+}
+.moment-btn-ghost {
+  background: transparent;
+  color: var(--deep) !important;
+  border-color: var(--edge);
+}
+
+/* Arati flame flicker */
+.flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.flame.is-lit {
+  animation: flicker 0.9s ease-in-out infinite alternate;
+}
+.flame-core.is-lit {
+  animation-duration: 0.7s;
+}
+@keyframes flicker {
+  0% { transform: scale(1, 1) rotate(-2deg); }
+  50% { transform: scale(0.94, 1.08) rotate(2deg); }
+  100% { transform: scale(1.04, 0.95) rotate(-1deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flame.is-lit {
+    animation: none;
+  }
+}
+@media (min-width: 760px) {
+  .moment-art {
+    height: 170px;
+  }
+}

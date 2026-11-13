@@ -1,21 +1,21 @@
 import { motion, type MotionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
-import { useEffect, useRef } from 'react';
-import { COUPLE, VENUE } from '../data/guestInfo';
-import { MUHURTHA } from '../data/weddingEvents';
+import { type ReactNode, useEffect, useRef } from 'react';
+import { scrollToId } from '../components/Navigation';
+import { COUPLE, HOSTS, VENUE } from '../data/guestInfo';
+import { MUHURTHA, weddingEvents } from '../data/weddingEvents';
 import { type FrameStore, HERO_FRAMES } from '../hooks/useFrameSequence';
 import { useNow } from '../hooks/useNow';
 import { coverRect, posterUrl } from '../utils/frameSequence';
-import { countdown, toMs } from '../utils/timeCalculations';
+import { activePanel, anyPanelOpacity, HANDOFF, HANDOFF_DIM, PANELS, panelAnchor, panelOpacity, panelShift } from '../utils/heroPanels';
+import { countdown, eventTimeText, formatDateIso, toMs } from '../utils/timeCalculations';
 import './hero.css';
 
-const CAPTIONS = ['Halebidu · the old Hoysala capital', 'Thursday, 3 December 2026', 'Step inside — you’re invited'];
-/** Each caption owns a third of 0.45–0.9 and fades in and out within it, so two never overlap. */
-const CAPTION_WINDOWS: [number, number][] = [
-  [0.45, 0.6],
-  [0.6, 0.75],
-  [0.75, 0.9],
-];
 const MAX_DPR = 2;
+/** In-page anchors inside the scroll track: the nav lands on these panels. */
+const ANCHORS: { id: string; panel: number }[] = [
+  { id: 'invitation', panel: 1 },
+  { id: 'programme', panel: 2 },
+];
 
 /** Poster: no JS needed to pick it, so it is the first paint. Mobile sources match the `< 0.8` portrait rule. */
 function Poster() {
@@ -32,7 +32,9 @@ function Poster() {
   );
 }
 
-function TitleBlock({ ready, reduce }: { ready: boolean; reduce: boolean }) {
+/* ---------- Panel content (shared by the scrubbed film and the reduced-motion page) ---------- */
+
+function OpeningPanel({ ready, reduce }: { ready: boolean; reduce: boolean }) {
   const now = useNow();
   const cd = countdown(toMs(MUHURTHA.startDateTime!), now);
   const show = ready || reduce;
@@ -52,16 +54,36 @@ function TitleBlock({ ready, reduce }: { ready: boolean; reduce: boolean }) {
       <motion.p className="eyebrow" {...rise(0.35)}>
         Together with their families
       </motion.p>
-      <h1 className="hero-names display">
-        <motion.span className="hero-name" {...rise(0.55)}>
-          {COUPLE.groom.short}
-        </motion.span>
-        <motion.span className="hero-amp italic" {...rise(0.8)} aria-label="and">
-          &amp;
-        </motion.span>
-        <motion.span className="hero-name" {...rise(1.0)}>
-          {COUPLE.bride.short}
-        </motion.span>
+      {/* Hand-lettered lock-up: first name on top, second set right and tucked under it, a brush swash beneath. */}
+      <h1 className="hero-names" aria-label={`${COUPLE.groom.short} and ${COUPLE.bride.short}`}>
+        <span className="hero-lock" aria-hidden="true">
+          <motion.span className="hero-name hero-name-a" {...rise(0.55)}>
+            {COUPLE.groom.short}
+          </motion.span>
+          <motion.span className="hero-amp italic" {...rise(0.8)}>
+            &amp;
+          </motion.span>
+          <motion.span className="hero-name hero-name-b" {...rise(1.0)}>
+            {COUPLE.bride.short}
+          </motion.span>
+          <motion.svg
+            className="hero-swash"
+            viewBox="0 0 400 48"
+            preserveAspectRatio="none"
+            initial={reduce ? false : { scaleX: 0, opacity: 0 }}
+            animate={reduce || show ? { scaleX: 1, opacity: 1 } : undefined}
+            transition={{ delay: 1.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            style={{ originX: 0 }}
+          >
+            <defs>
+              <filter id="swash-rough" x="-5%" y="-40%" width="110%" height="180%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.9 0.06" numOctaves="2" seed="5" />
+                <feDisplacementMap in="SourceGraphic" scale="6" />
+              </filter>
+            </defs>
+            <path filter="url(#swash-rough)" d="M6 40 C 90 22, 230 10, 396 8 C 300 16, 180 26, 22 46 Z" />
+          </motion.svg>
+        </span>
       </h1>
       <motion.div className="hero-meta" {...rise(1.2)}>
         <span>{COUPLE.weddingDateLabel}</span>
@@ -102,17 +124,67 @@ function TitleBlock({ ready, reduce }: { ready: boolean; reduce: boolean }) {
   );
 }
 
-function Caption({ text, win, p }: { text: string; win: [number, number]; p: MotionValue<number> }) {
-  const [a, b] = win;
-  const ramp = 0.03;
-  const opacity = useTransform(p, [a, a + ramp, b - ramp, b], [0, 1, 1, 0]);
-  const y = useTransform(p, [a, a + ramp, b - ramp, b], [24, 0, 0, -24]);
+function FamiliesPanel() {
   return (
-    <motion.p className="hero-caption display" style={{ opacity, y }} aria-hidden="true">
-      {text}
-    </motion.p>
+    <>
+      <h2 className="eyebrow">The invitation</h2>
+      <p className="panel-text">You are invited to the wedding of</p>
+      <p className="panel-name display">{COUPLE.groom.full}</p>
+      <p className="panel-with display italic">and</p>
+      <p className="panel-name display">{COUPLE.bride.full}</p>
+      <p className="panel-small">With the blessings of both families</p>
+    </>
   );
 }
+
+function ProgrammePanel() {
+  const events = [...weddingEvents].sort((a, b) => a.order - b.order);
+  const go = (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollToId('celebrations');
+  };
+  return (
+    <>
+      <h2 className="eyebrow">The celebrations</h2>
+      <ol className="programme">
+        {events.map((e) => (
+          <li key={e.id} className={e.priority === 'critical' ? 'is-key' : undefined}>
+            <span className="pg-when">
+              {formatDateIso(e.date)} · {eventTimeText(e)}
+            </span>
+            <span className="pg-title display">{e.title}</span>
+          </li>
+        ))}
+      </ol>
+      <p className="panel-small">All at {VENUE.hall}.</p>
+      <a className="panel-link" href="#celebrations" onClick={go}>
+        Times, directions and calendar reminders
+      </a>
+    </>
+  );
+}
+
+function VenuePanel() {
+  return (
+    <>
+      <h2 className="eyebrow">The venue</h2>
+      <p className="panel-name display">{VENUE.hall}</p>
+      <p className="panel-text">{VENUE.address}</p>
+      <p className="panel-small">With love, awaiting your arrival</p>
+      <p className="panel-hosts display">{HOSTS.signature}</p>
+      <div className="hero-actions">
+        <a className="btn btn-iris" href={VENUE.directionsUrl} target="_blank" rel="noreferrer">
+          Directions
+        </a>
+        <a className="btn btn-ghost" href="#rsvp">
+          RSVP
+        </a>
+      </div>
+    </>
+  );
+}
+
+/* ---------- Scrubbed film ---------- */
 
 /** Draws the nearest available frame for the smoothed scroll index, only when what would be drawn changes. */
 function useCanvasScrub(canvasRef: React.RefObject<HTMLCanvasElement>, store: FrameStore | null, index: MotionValue<number>) {
@@ -171,10 +243,27 @@ function useCanvasScrub(canvasRef: React.RefObject<HTMLCanvasElement>, store: Fr
   }, [canvasRef, store, index]);
 }
 
+function Panel({ i, p, className, children, refs }: { i: number; p: MotionValue<number>; className: string; children: ReactNode; refs: React.MutableRefObject<(HTMLDivElement | null)[]> }) {
+  const opacity = useTransform(p, (v) => panelOpacity(i, v));
+  const y = useTransform(p, (v) => panelShift(i, v));
+  return (
+    <motion.div
+      ref={(el) => {
+        refs.current[i] = el;
+      }}
+      className={`hero-panel ${className}`}
+      data-panel={PANELS[i].id}
+      style={{ opacity, y }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 function ScrubbedHero({ ready, store }: { ready: boolean; store: FrameStore | null }) {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const count = HERO_FRAMES.count;
 
   const { scrollYProgress: p } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });
@@ -182,44 +271,59 @@ function ScrubbedHero({ ready, store }: { ready: boolean; store: FrameStore | nu
   const index = useSpring(rawIndex, { stiffness: 120, damping: 30 });
   useCanvasScrub(canvasRef, store, index);
 
-  const titleOpacity = useTransform(p, [0, 0.15, 0.45], [1, 1, 0]);
-  const titleY = useTransform(p, [0.15, 0.45], [0, -80]);
-  // Hidden buttons must not catch clicks or focus.
-  useMotionValueEvent(titleOpacity, 'change', (o) => {
-    const el = titleRef.current;
+  // Only the panel being read can be clicked or focused; the others are inert.
+  const setLive = (el: HTMLElement | null, live: boolean) => {
     if (!el) return;
-    const hidden = o < 0.5;
-    el.style.pointerEvents = hidden ? 'none' : '';
-    if (hidden) el.setAttribute('inert', '');
-    else el.removeAttribute('inert');
-  });
-  const cueOpacity = useTransform(p, [0, 0.08], [1, 0]);
-  const darken = useTransform(p, [0.9, 1], [0, 1]);
-  const dissolve = useTransform(p, [0.95, 1], [0, 1]);
+    el.style.pointerEvents = live ? '' : 'none';
+    if (live) el.removeAttribute('inert');
+    else el.setAttribute('inert', '');
+  };
+  const syncInert = (v: number) => {
+    const active = activePanel(v);
+    panelRefs.current.forEach((el, i) => setLive(el, i === active));
+  };
+  useMotionValueEvent(p, 'change', syncInert);
+  useEffect(() => syncInert(p.get()), []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const titleShade = useTransform(p, (v) => panelOpacity(0, v));
+  const readShade = useTransform(p, (v) => anyPanelOpacity(v, 1));
+  const darken = useTransform(p, HANDOFF, [0, HANDOFF_DIM]);
 
   return (
     <section id="welcome" ref={sectionRef} className="hero-film dark" aria-label="Welcome">
+      {ANCHORS.map((a) => (
+        <span
+          key={a.id}
+          id={a.id}
+          className="hero-anchor"
+          style={{ '--at': panelAnchor(a.panel) } as React.CSSProperties}
+          aria-hidden="true"
+        />
+      ))}
       <div className="hero-stage">
         <Poster />
         <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
-        <div className="hero-shade-base" aria-hidden="true" />
-        <motion.div className="hero-shade" style={{ opacity: titleOpacity }} aria-hidden="true" />
-        {CAPTIONS.map((t, i) => (
-          <Caption key={t} text={t} win={CAPTION_WINDOWS[i]} p={p} />
-        ))}
+        <motion.div className="hero-shade" style={{ opacity: titleShade }} aria-hidden="true" />
+        <motion.div className="hero-shade-read" style={{ opacity: readShade }} aria-hidden="true" />
         <motion.div className="hero-darken" style={{ opacity: darken }} aria-hidden="true" />
-        <motion.div className="hero-dissolve" style={{ opacity: dissolve }} aria-hidden="true" />
-        <motion.div ref={titleRef} className="hero-content wrap" style={{ opacity: titleOpacity, y: titleY }}>
-          <TitleBlock ready={ready} reduce={false} />
-        </motion.div>
-        <motion.a className="scroll-cue" href="#invitation" aria-label="Scroll to the invitation" style={{ opacity: cueOpacity }}>
-          <span>Scroll to unfold</span>
-          <span className="scroll-line" aria-hidden="true" />
-        </motion.a>
+        <Panel i={0} p={p} className="hero-content wrap" refs={panelRefs}>
+          <OpeningPanel ready={ready} reduce={false} />
+        </Panel>
+        <Panel i={1} p={p} className="hero-read wrap" refs={panelRefs}>
+          <FamiliesPanel />
+        </Panel>
+        <Panel i={2} p={p} className="hero-read wrap" refs={panelRefs}>
+          <ProgrammePanel />
+        </Panel>
+        <Panel i={3} p={p} className="hero-read wrap" refs={panelRefs}>
+          <VenuePanel />
+        </Panel>
       </div>
     </section>
   );
 }
+
+/* ---------- Reduced motion: the same content, stacked in normal flow over the poster ---------- */
 
 function StaticHero() {
   return (
@@ -228,14 +332,25 @@ function StaticHero() {
         <Poster />
         <div className="hero-shade" aria-hidden="true" />
         <div className="hero-content wrap">
-          <TitleBlock ready reduce />
+          <OpeningPanel ready reduce />
+        </div>
+      </div>
+      <div className="hero-static-more wrap">
+        <div id="invitation" className="hero-read">
+          <FamiliesPanel />
+        </div>
+        <div id="programme" className="hero-read">
+          <ProgrammePanel />
+        </div>
+        <div className="hero-read">
+          <VenuePanel />
         </div>
       </div>
     </section>
   );
 }
 
-/** Opening film: frames scrubbed by scroll on a sticky canvas. Reduced motion gets the poster frame only. */
+/** Opening film: the invitation unfolds in four panels over scroll-scrubbed frames. Reduced motion gets the poster and a stacked page. */
 export function HeroFilm({ ready, store }: { ready: boolean; store: FrameStore | null }) {
   const reduce = useReducedMotion();
   return reduce ? <StaticHero /> : <ScrubbedHero ready={ready} store={store} />;

@@ -63,8 +63,8 @@ function assertSafe(events: WeddingEvent[], o: PlannerOptions = opts, stay?: { s
 
 describe('real wedding schedule (family PDF)', () => {
   it('keeps all four events, in order, and reports the untimed one', () => {
-    expect(weddingEvents.map((e) => e.id)).toEqual(['devatha-karya', 'muhurtha', 'aaratakshate', 'bhojana']);
-    expect(untimedEvents(weddingEvents).map((e) => e.id)).toEqual(['devatha-karya']);
+    expect(weddingEvents.map((e) => e.id)).toEqual(['haladhi', 'muhurtha', 'aaratakshate', 'bhojana']);
+    expect(untimedEvents(weddingEvents).map((e) => e.id)).toEqual(['haladhi']);
   });
 
   it('merges Aaratakshate and Bhojana into one busy block without dropping either', () => {

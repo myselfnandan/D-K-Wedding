@@ -5,26 +5,32 @@
 export const regionalDishes = [
   {
     name: 'Idli, vada & chutney',
+    short: 'Rice cakes, crisp vada, chutney',
     note: 'The Karnataka breakfast — steamed rice cakes, crisp lentil vada, coconut chutney and sambar.',
   },
   {
     name: 'Akki rotti',
+    short: 'Hand-patted rice-flour flatbread',
     note: 'Rice-flour flatbread patted out by hand with onion, dill and green chilli — a Malnad morning favourite.',
   },
   {
     name: 'Ragi mudde & saaru',
+    short: 'Millet balls with peppery saaru',
     note: 'Finger-millet balls with a peppery lentil or vegetable saaru: the everyday meal of rural Karnataka.',
   },
   {
     name: 'Bisi bele bath',
+    short: 'Spiced rice and lentils with ghee',
     note: 'Rice, lentils and vegetables cooked together with a spiced, tamarind-tinged masala and finished with ghee.',
   },
   {
     name: 'Holige / obbattu',
+    short: 'Sweet flatbread with jaggery',
     note: 'Sweet flatbread filled with jaggery and lentil or coconut — the taste of every Kannada celebration.',
   },
   {
     name: 'Filter coffee',
+    short: 'Decoction, hot milk and sugar',
     note: 'Decoction, hot milk and sugar, poured between tumbler and dabara. You are a short drive from coffee country.',
   },
 ];

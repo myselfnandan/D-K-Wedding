@@ -1,0 +1,390 @@
+/* Explore: one painted drive-time map with the place list and a detail card. Mobile first. */
+.places {
+  background: linear-gradient(180deg, var(--haze), var(--cloud));
+}
+/* minmax(0, …): without it the SVG's 1000-unit intrinsic width blows the column out on phones. */
+.places-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+.places-side {
+  min-width: 0;
+}
+.pm-frame {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 60px -40px rgba(22, 26, 53, 0.45);
+  background: #f5f2ea;
+}
+.pm-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  font-family: var(--f-body);
+  -webkit-tap-highlight-color: transparent;
+}
+.pm-note {
+  margin: 0;
+  padding: 10px 16px 12px;
+  font-size: 12px;
+  color: var(--muted);
+  background: #f5f2ea;
+  border-top: 1px solid rgba(47, 54, 112, 0.08);
+}
+
+/* Painted ground */
+.pm-paper {
+  fill: #f5f2ea;
+}
+.pm-wash-hills {
+  fill: #a6c8e2;
+  opacity: 0.55;
+}
+.pm-wash-plain {
+  fill: #b5baff;
+  opacity: 0.28;
+}
+.pm-wash-centre {
+  fill: #e4e7fb;
+  opacity: 0.8;
+}
+.pm-ridge-back {
+  fill: #7c86d9;
+  opacity: 0.22;
+}
+.pm-ridge-mid {
+  fill: #2f3670;
+  opacity: 0.2;
+}
+.pm-ridge-front {
+  fill: #2f3670;
+  opacity: 0.3;
+}
+.pm-water {
+  fill: #a6c8e2;
+  opacity: 0.85;
+}
+.pm-river {
+  fill: none;
+  stroke: #a6c8e2;
+  stroke-width: 9;
+  stroke-linecap: round;
+  opacity: 0.8;
+}
+
+/* Rings */
+.pm-ring path {
+  fill: none;
+  stroke: #2f3670;
+  stroke-width: 2.4;
+  stroke-opacity: 0.35;
+  stroke-dasharray: 2 0;
+}
+.pm-ring text {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  fill: #2f3670;
+  opacity: 0.7;
+  paint-order: stroke;
+  stroke: #f5f2ea;
+  stroke-width: 8px;
+}
+
+/* Route */
+.pm-route {
+  fill: none;
+  stroke: #2f3670;
+  stroke-width: 6;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+
+/* Venue */
+.pm-venue-disc {
+  fill: var(--ink);
+}
+.pm-venue-temple {
+  fill: var(--iris);
+}
+.pm-venue-label {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: #f5f2ea;
+  stroke-width: 8px;
+}
+.pm-pulse {
+  fill: none;
+  stroke: var(--iris);
+  stroke-width: 4;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pm-pulse 2.8s var(--ease) infinite;
+}
+@keyframes pm-pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Pins */
+.pm-pin {
+  cursor: pointer;
+  outline: none;
+}
+.pm-hit {
+  fill: transparent;
+}
+.pm-dot {
+  stroke: #f5f2ea;
+  stroke-width: 5;
+  transition: r 0.25s var(--ease);
+}
+.pm-num {
+  font-size: 30px;
+  font-weight: 700;
+  pointer-events: none;
+}
+.pm-near .pm-dot { fill: var(--iris); }
+.pm-near .pm-num { fill: var(--ink); }
+.pm-mid .pm-dot { fill: var(--ink-3); }
+.pm-mid .pm-num { fill: #fff; }
+.pm-far .pm-dot { fill: var(--ink); }
+.pm-far .pm-num { fill: #fff; }
+.pm-halo {
+  fill: none;
+  stroke: var(--iris);
+  stroke-width: 6;
+  opacity: 0.9;
+}
+.pm-pin:focus-visible .pm-dot {
+  stroke: var(--accent);
+  stroke-width: 8;
+}
+.pm-label rect {
+  fill: var(--ink);
+}
+.pm-label text {
+  font-size: 28px;
+  font-weight: 600;
+  fill: var(--on-dark);
+}
+.pm-compass circle {
+  fill: rgba(245, 242, 234, 0.85);
+  stroke: rgba(47, 54, 112, 0.35);
+  stroke-width: 2;
+}
+.pm-compass path {
+  fill: var(--ink-3);
+}
+.pm-compass text {
+  font-size: 20px;
+  font-weight: 700;
+  fill: var(--ink-3);
+}
+
+/* List: a swipeable strip on phones, a wrapped set on desktop */
+.pm-list {
+  list-style: none;
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 2px var(--gutter) 8px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.pm-list::-webkit-scrollbar {
+  display: none;
+}
+.pm-list li {
+  scroll-snap-align: start;
+  flex: none;
+}
+.pm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.pm-chip-n {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+.pm-chip.pm-near .pm-chip-n { background: var(--iris); color: var(--ink); }
+.pm-chip.pm-mid .pm-chip-n { background: var(--ink-3); color: #fff; }
+.pm-chip.pm-far .pm-chip-n { background: var(--ink); color: #fff; }
+.pm-chip-time {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.pm-chip[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-dark);
+}
+.pm-chip[aria-pressed='true'] .pm-chip-time {
+  color: var(--on-dark-muted);
+}
+
+/* Detail card */
+.pm-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.pm-card-media {
+  aspect-ratio: 16 / 9;
+  background: var(--haze);
+  overflow: hidden;
+}
+.pm-card-media picture,
+.pm-card-media img,
+.pm-card-media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pm-card-body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+.pm-card-body h3,
+.pm-card-body p {
+  margin: 0;
+}
+.pm-card-meta {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.pm-card-desc {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.pm-card-small {
+  font-size: 13px;
+  color: var(--muted);
+}
+.pm-card-note {
+  font-size: 13px;
+  color: #6a4300;
+  background: #fff7e8;
+  border-radius: var(--r-sm);
+  padding: 8px 10px;
+}
+.places-foot {
+  margin-top: 20px;
+  max-width: 80ch;
+}
+
+@media (min-width: 900px) {
+  .places-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 32px;
+    align-items: start;
+  }
+  .places-side {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .pm-list {
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
+@media (max-width: 899px) {
+  .places-side {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  /* The side-scrolling strip hid options off-screen; phones get the stepper instead. */
+  .pm-list {
+    display: none;
+  }
+}
+@media (min-width: 900px) {
+  .places-side .pm-stepper {
+    display: none;
+  }
+}
+.pm-stepper .pm-chip-n {
+  flex: none;
+}
+.pm-stepper .pm-chip-n.pm-near { background: var(--iris); color: var(--ink); }
+.pm-stepper .pm-chip-n.pm-mid { background: var(--ink-3); color: #fff; }
+.pm-stepper .pm-chip-n.pm-far { background: var(--ink); color: #fff; }
+.pm-stepper .pm-chip-time {
+  flex: none;
+  font-weight: 400;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pm-pulse {
+    animation: none;
+  }
+}
+/* Selected-place tag, pinned to the map's top-left corner (outside the pin area). */
+.pm-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 64px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: calc(100% - 76px);
+  padding: 5px 12px 5px 5px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--on-dark);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px -12px rgba(22, 26, 53, 0.6);
+  pointer-events: none;
+}
+.pm-tag-n {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--iris);
+  color: var(--ink);
+  font-size: 12px;
+}

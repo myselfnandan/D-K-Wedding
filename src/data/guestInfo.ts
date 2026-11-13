@@ -15,35 +15,20 @@ export const VENUE = {
 export const COUPLE = {
   groom: {
     short: 'Dileep',
-    full: 'Chi. Ra. Dileep S',
-    parents: 'Smt. H A Shashikala & Sri S N Shashidhar',
+    full: 'Dileep S',
     home: 'D M Kurke, Arsikere Taluk, Hassan District',
-    relation: 'eldest son',
   },
   bride: {
     short: 'Kavya',
-    full: 'Chi. Kum. Sow. Kavya H Y',
-    parents: 'Smt. Lathamani & Sri Yogesh Achar',
+    full: 'Kavya H Y',
     home: 'M. Hunasekere, Belur Taluk, Hassan District',
-    relation: 'eldest daughter',
   },
   weddingDateLabel: 'Thursday, 3 December 2026',
 };
 
-export const INVOCATIONS = [
-  'Sri Vishwakarma Parabrahmane Namaha',
-  'Sri Kalikamba Devi Krupe',
-  'Sri Mallikarjuna Swamy Prasanna',
-  'Sri Anjaneya Swamy Prasanna',
-  'Sri Lakshmi Narasimha Swamy Prasanna',
-];
-
-export const PANCHANGA =
-  'Shalivahana Shaka 1948 · Parabhava samvatsara · Dakshinayana · Kartika masa, Krishna paksha';
-
+/** No individual names other than the couple appear anywhere on the site (owner's request). */
 export const HOSTS = {
-  welcome: 'The Surachar and Ananthachar families',
-  awaiting: ['Smt. Shashikala & Sri Shashidhar', 'Ku. Chinmayi S'],
+  signature: 'Both families',
 };
 
 export const CONTACTS = {
