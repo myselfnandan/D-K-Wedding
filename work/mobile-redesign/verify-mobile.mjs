@@ -15,7 +15,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const PANELS = [
   { id: 'opening', at: 0.08, text: ['Dileep', 'Kavya', 'Thursday, 3 December 2026', 'Muhurtha 8:30', 'RSVP', 'Directions'] },
   { id: 'families', at: 0.34, text: ['Dileep S', 'Kavya H Y', 'With the blessings of both families'] },
-  { id: 'programme', at: 0.59, text: ['Haladhi', 'Evening', 'Muhurtha', '8:30 am – 9:30 am', 'Aaratakshate', 'From 11:30 am', 'Bhojana', 'From 12:30 pm'] },
+  { id: 'programme', at: 0.59, text: ['Haladhi', 'From 2:00 pm', 'Sangeeth', 'From 6:00 pm', 'Muhurtha', '8:30 am – 9:30 am', 'Aaratakshate', 'From 11:30 am', 'Bhojana', 'From 12:30 pm'] },
   { id: 'venue', at: 0.88, text: ['Sri Pushpagiri Mahasamsthana Kalyana Mantapa', 'Halebeedu', 'Both families', 'Directions', 'RSVP'] },
 ];
 const PHONES = [
@@ -134,6 +134,9 @@ for (const ph of PHONES) {
   const ctx = await browser.newContext(PHONES[0]);
   const page = await ctx.newPage();
   await page.goto(BASE);
+  await sleep(2500);
+  // The entrance (stone doors + monogram) is excluded from the empty-screen check, so wait until it has opened.
+  await page.waitForSelector('.preloader', { state: 'detached', timeout: 8000 });
   await sleep(2500);
   const height = await page.evaluate(() => document.body.scrollHeight);
   record('page height at 390×844 ≤ 18,000 px', height <= 18000, `scrollHeight=${height}px (before: 31,238px)`);
@@ -260,7 +263,7 @@ for (const ph of PHONES) {
   record('no individual names besides the couple', names.length === 0, `found=[${names.join(', ')}]`);
 
   // Replay: scroll a celebration card into view, away, and back; the fade-in and the illustration must run again.
-  const card = page.locator('#celebrations .moment').nth(1);
+  const card = page.locator('#celebrations .moment-muhurtha');
   await card.scrollIntoViewIfNeeded();
   await sleep(3000);
   const seen = await card.evaluate((c) => +getComputedStyle(c.querySelector('.moment-body')).opacity);

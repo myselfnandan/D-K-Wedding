@@ -7,13 +7,13 @@ PASS  [390x844] hero panel "families" readable and usable
 PASS  [390x844] hero panel "families" contrast meets WCAG AA over the film
       6 text boxes; tightest "The invitation" 8.64:1 (needs 4.5:1); median 11.84:1
 PASS  [390x844] hero panel "programme" readable and usable
-      opacity=1 inert=false other panels max opacity=0; content top=376px (nav pill ends ~64) bottom=844/844; missing=[]; links/buttons=1 blocked=[]
+      opacity=1 inert=false other panels max opacity=0; content top=308px (nav pill ends ~64) bottom=844/844; missing=[]; links/buttons=1 blocked=[]
 PASS  [390x844] hero panel "programme" contrast meets WCAG AA over the film
-      11 text boxes; tightest "Thu 3 Dec · From 12:30 pm" 7.01:1 (needs 4.5:1); median 9.85:1
+      13 text boxes; tightest "Thu 3 Dec · From 12:30 pm" 6.94:1 (needs 4.5:1); median 9.88:1
 PASS  [390x844] hero panel "venue" readable and usable
       opacity=1 inert=false other panels max opacity=0; content top=492px (nav pill ends ~64) bottom=844/844; missing=[]; links/buttons=2 blocked=[]
 PASS  [390x844] hero panel "venue" contrast meets WCAG AA over the film
-      5 text boxes; tightest "The venue" 8.99:1 (needs 4.5:1); median 9.18:1
+      5 text boxes; tightest "The venue" 8.99:1 (needs 4.5:1); median 9.17:1
 PASS  [360x740] hero panel "opening" readable and usable
       opacity=1 inert=false other panels max opacity=0; content top=112px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=2 blocked=[]
 PASS  [360x740] hero panel "opening" contrast meets WCAG AA over the film
@@ -21,17 +21,17 @@ PASS  [360x740] hero panel "opening" contrast meets WCAG AA over the film
 PASS  [360x740] hero panel "families" readable and usable
       opacity=1 inert=false other panels max opacity=0; content top=476px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=0 blocked=[]
 PASS  [360x740] hero panel "families" contrast meets WCAG AA over the film
-      6 text boxes; tightest "The invitation" 5.94:1 (needs 4.5:1); median 11.70:1
+      6 text boxes; tightest "The invitation" 5.93:1 (needs 4.5:1); median 11.70:1
 PASS  [360x740] hero panel "programme" readable and usable
-      opacity=1 inert=false other panels max opacity=0; content top=272px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=1 blocked=[]
+      opacity=1 inert=false other panels max opacity=0; content top=204px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=1 blocked=[]
 PASS  [360x740] hero panel "programme" contrast meets WCAG AA over the film
-      11 text boxes; tightest "Wed 2 Dec · Evening" 7.43:1 (needs 4.5:1); median 9.76:1
+      13 text boxes; tightest "Thu 3 Dec · From 12:30 pm" 7.51:1 (needs 4.5:1); median 10.80:1
 PASS  [360x740] hero panel "venue" readable and usable
       opacity=1 inert=false other panels max opacity=0; content top=390px (nav pill ends ~64) bottom=740/740; missing=[]; links/buttons=2 blocked=[]
 PASS  [360x740] hero panel "venue" contrast meets WCAG AA over the film
-      5 text boxes; tightest "Halebeedu, Belur Taluk, Hass" 7.93:1 (needs 4.5:1); median 8.92:1
+      5 text boxes; tightest "Halebeedu, Belur Taluk, Hass" 7.91:1 (needs 4.5:1); median 8.92:1
 PASS  page height at 390×844 ≤ 18,000 px
-      scrollHeight=11558px (before: 31,238px)
+      scrollHeight=11817px (before: 31,238px)
 PASS  no screen without visible text (390×844, 80% steps)
       18 steps; empty at y=[]
 PASS  closing: copy clear of the illustration, contrast ≥ 4.5:1
@@ -55,6 +55,6 @@ PASS  no "Scroll to unfold" cue
 PASS  no individual names besides the couple
       found=[]
 PASS  animations replay when a section comes back on screen
-      card text opacity: first view=1, scrolled away=0, just back=0.894385, settled=1; taali knot width just back=0px, settled=11.1px
+      card text opacity: first view=1, scrolled away=0, just back=0.634656, settled=1; taali knot width just back=0px, settled=11.1px
 
 29/29 checks passed

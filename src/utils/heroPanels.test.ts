@@ -51,7 +51,8 @@ describe('hero panels', () => {
 describe('eventTimeText', () => {
   it('formats the invitation times', () => {
     const t = Object.fromEntries(weddingEvents.map((e) => [e.id, eventTimeText(e)]));
-    expect(t.haladhi).toBe('Evening');
+    expect(t.haladhi).toBe('From 2:00 pm');
+    expect(t.sangeeth).toBe('From 6:00 pm');
     expect(t.muhurtha).toBe('8:30 am – 9:30 am');
     expect(t.aaratakshate).toBe('From 11:30 am');
     expect(t.bhojana).toBe('From 12:30 pm');

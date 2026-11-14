@@ -155,3 +155,18 @@
     height: 170px;
   }
 }
+
+/* Sangeeth: an evening palette */
+.moment-sangeeth { --bg: #f7f3ff; --deep: #4b2a8a; --tint: #e7ddff; --edge: #d8c9f6; }
+.bulb.is-on {
+  animation: twinkle 1.6s ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  0% { opacity: 1; }
+  100% { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bulb.is-on {
+    animation: none;
+  }
+}

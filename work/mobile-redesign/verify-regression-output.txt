@@ -9,7 +9,7 @@ PASS  [desktop] forward scrub covers the film
 PASS  [desktop] backward scrub rewinds to frame 0
       {"draws":119,"distinct":119,"first":118,"last":0,"reversals":0,"maxJump":1}
 PASS  [desktop] bitmap window capped after 2 full scrubs
-      JS heap used=6.3 MB (total 6.9 MB); live ImageBitmaps=24 (cap 24); decoded <img>=120
+      JS heap used=6.6 MB (total 7.9 MB); live ImageBitmaps=24 (cap 24); decoded <img>=120
 PASS  [mobile] frame set chosen
       kind=mobile
 PASS  [mobile] canvas frames differ by scroll position
@@ -21,7 +21,7 @@ PASS  [mobile] forward scrub covers the film
 PASS  [mobile] backward scrub rewinds to frame 0
       {"draws":119,"distinct":119,"first":118,"last":0,"reversals":0,"maxJump":1}
 PASS  [mobile] bitmap window capped after 2 full scrubs
-      JS heap used=6.4 MB (total 7.2 MB); live ImageBitmaps=16 (cap 16); decoded <img>=120
+      JS heap used=6.7 MB (total 7.4 MB); live ImageBitmaps=16 (cap 16); decoded <img>=120
 PASS  [desktop] poster painted without any frame
       {"complete":true,"src":"frames/desktop/poster.avif","fp":"high","loading":"eager","frameDrawn":null}
 PASS  [desktop] title text contrast meets WCAG AA over the poster

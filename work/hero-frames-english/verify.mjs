@@ -26,7 +26,8 @@ async function open(ctxOpts, url = BASE, setup) {
   const page = await ctx.newPage();
   if (setup) await setup(page, ctx);
   await page.goto(url, { waitUntil: 'load' });
-  await page.waitForSelector('.preloader', { state: 'detached', timeout: 5000 }).catch(() => {});
+  // The entrance holds ~4 s and its doors take ~1 s to open.
+  await page.waitForSelector('.preloader', { state: 'detached', timeout: 9000 }).catch(() => {});
   return { ctx, page };
 }
 
