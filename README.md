@@ -1,6 +1,6 @@
 # Dileep & Kavya — wedding invitation & guest planner
 
-Single-page React (Vite + TypeScript + Motion) site for the wedding on **Thursday 3 December 2026** at Sri Pushpagiri Mahasamsthana Kalyana Mantapa, Halebidu.
+Single-page React (Vite + TypeScript + Motion) site for the wedding on **Thursday 3 December 2026** at Sri Pushpagiri Mahasamsthana Kalyana Mantapa, Halebeedu.
 
 ```bash
 npm install
@@ -27,5 +27,5 @@ Append `?now=2026-12-03T09:40:00%2B05:30` to the URL to freeze the clock inside 
 ## Data provenance
 - Event details: the family's invitation PDF (V7.0).
 - Drive times/distances: Google Maps from the venue pin, checked 9 Nov 2026.
-- Belur hours and Yagachi season: Karnataka Tourism. Halebidu hours: third-party listings, marked unverified in the UI.
+- Belur hours and Yagachi season: Karnataka Tourism. Halebeedu hours: third-party listings, marked unverified in the UI.
 - Mullayanagiri/Baba Budangiri booking rules: press report; confirm on chikkamagaluru.nic.in.

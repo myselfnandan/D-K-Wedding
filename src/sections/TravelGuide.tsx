@@ -94,7 +94,7 @@ export function TravelGuide() {
           <Reveal className="card fact">
             <TrainFront size={20} aria-hidden="true" />
             <h3 className="display h-sm">Nearest railway</h3>
-            <p className="muted">Hassan Junction, about 51 minutes by road (32.6 km). Arrange a taxi onward to Halebidu.</p>
+            <p className="muted">Hassan Junction, about 51 minutes by road (32.6 km). Arrange a taxi onward to Halebeedu.</p>
           </Reveal>
           <Reveal className="card fact" delay={0.05}>
             <Plane size={20} aria-hidden="true" />
@@ -105,7 +105,7 @@ export function TravelGuide() {
             <Car size={20} aria-hidden="true" />
             <h3 className="display h-sm">Getting around</h3>
             <p className="muted">
-              Karnataka Tourism recommends a taxi or your own vehicle around Belur and Halebidu; buses run from Hassan to Belur.
+              Karnataka Tourism recommends a taxi or your own vehicle around Belur and Halebeedu; buses run from Hassan to Belur.
             </p>
           </Reveal>
           <Reveal className="card fact" delay={0.15}>

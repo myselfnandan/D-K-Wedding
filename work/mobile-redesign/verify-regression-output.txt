@@ -9,7 +9,7 @@ PASS  [desktop] forward scrub covers the film
 PASS  [desktop] backward scrub rewinds to frame 0
       {"draws":119,"distinct":119,"first":118,"last":0,"reversals":0,"maxJump":1}
 PASS  [desktop] bitmap window capped after 2 full scrubs
-      JS heap used=6.6 MB (total 7.9 MB); live ImageBitmaps=24 (cap 24); decoded <img>=120
+      JS heap used=6.6 MB (total 7.7 MB); live ImageBitmaps=24 (cap 24); decoded <img>=120
 PASS  [mobile] frame set chosen
       kind=mobile
 PASS  [mobile] canvas frames differ by scroll position
@@ -52,11 +52,13 @@ PASS  calendar download
       file=haladhi-dileep-kavya.ics
 PASS  explore map: pin and list select a place
       pins=13; pin 12 → "Hebbe Falls" (aria-pressed=true); chip 5 → "Lakshmi Devi Temple, Doddagaddavalli"; directions=https://www.google.com/maps/dir/?api=1&origin…
-PASS  RSVP opens the WhatsApp link
-      window.open → https://wa.me/919980450419?text=RSVP%20%E2%80%94%20Dileep%20…; info link=https://wa.me/919980450419
+PASS  RSVP opens the WhatsApp link, with the accommodation choice
+      message lines: RSVP — Dileep & Kavya, 3 Dec 2026 | Name: Test Guest | Attending: Yes, 2 guests | Arriving: Wed 2 Dec | Accommodation: Needed, please arrange; info link=https://wa.me/919980450419
+PASS  accommodation card asks guests to tell the family in advance
+      Need a room? Please let the family know in advance. Choose “Yes, please arrange” under Accommodation when you RSVP.
 PASS  footer lines removed; photos carry their own credit
       still in footer=[]; on-photo credits=2 e.g. "Photo: Bikashrd, CC BY-SA 4.0"
 PASS  mobile menu opens, navigates and closes
       dialog=true, footer="Dileep · Kavya · 03-12-2026", body overflow open/after="hidden"/"", #explore top=80px
 
-30/30 checks passed
+31/31 checks passed

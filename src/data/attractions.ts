@@ -22,7 +22,7 @@ export const attractions: Attraction[] = [
     description:
       'The 12th-century twin-shrine masterpiece of the Hoysala capital, its walls carved with friezes of elephants, lions, epics and dancers. An ASI museum sits on the same grounds.',
     image: 'hoysaleswara',
-    imageAlt: 'The carved outer walls and twin shrines of the Hoysaleswara temple at Halebidu',
+    imageAlt: 'The carved outer walls and twin shrines of the Hoysaleswara temple at Halebeedu',
     roadDistanceKm: km(3.7),
     drivingTimeFromVenue: min(7),
     explorationDuration: { min: 45, typical: 75 },
@@ -35,7 +35,7 @@ export const attractions: Attraction[] = [
     seasonalNotes: null,
     accessibility: 'Visitors enter from the north side, closest to the parking lot. Flat stone paving around the temple.',
     suitableFor: ['solo', 'couple', 'family', 'elders', 'friends'],
-    mapUrl: dir('Hoysaleswara Temple, Halebidu'),
+    mapUrl: dir('Hoysaleswara Temple, Halebeedu'),
     cautions: ['A guide or audio tour makes the carvings far richer (Karnataka Tourism).'],
   },
   {
@@ -47,7 +47,7 @@ export const attractions: Attraction[] = [
     description:
       'A quieter Hoysala temple a short way from the Hoysaleswara, built in the reign of Veera Ballala II and raised on a carved stone platform.',
     image: 'kedareshwara',
-    imageAlt: 'Kedareshwara temple at Halebidu on its raised stone platform',
+    imageAlt: 'Kedareshwara temple at Halebeedu on its raised stone platform',
     roadDistanceKm: km(3.8),
     drivingTimeFromVenue: min(7),
     explorationDuration: { min: 20, typical: 30 },
@@ -60,7 +60,7 @@ export const attractions: Attraction[] = [
     seasonalNotes: null,
     accessibility: null,
     suitableFor: ['solo', 'couple', 'family', 'elders', 'friends'],
-    mapUrl: dir('Kedareshwara Temple, Halebidu'),
+    mapUrl: dir('Kedareshwara Temple, Halebeedu'),
     cautions: [],
   },
   {
@@ -72,7 +72,7 @@ export const attractions: Attraction[] = [
     description:
       'Three Jain temples — Parshwanatha, Adinatha and Shantinatha — about a kilometre from the Hoysaleswara. The Parshwanatha basadi has finely carved pillars and a 14-foot black stone figure under a seven-headed serpent.',
     image: 'basadi',
-    imageAlt: 'Parshvanatha Basadi, a Jain temple at Halebidu',
+    imageAlt: 'Parshvanatha Basadi, a Jain temple at Halebeedu',
     roadDistanceKm: km(3.4),
     drivingTimeFromVenue: min(6),
     explorationDuration: { min: 25, typical: 40 },
@@ -85,7 +85,7 @@ export const attractions: Attraction[] = [
     seasonalNotes: null,
     accessibility: null,
     suitableFor: ['solo', 'couple', 'family', 'elders', 'friends'],
-    mapUrl: dir('Parshvanatha Basadi, Basadihalli, Halebidu'),
+    mapUrl: dir('Parshvanatha Basadi, Basadihalli, Halebeedu'),
     cautions: [],
   },
   {
@@ -95,7 +95,7 @@ export const attractions: Attraction[] = [
     latitude: 13.281972,
     longitude: 75.996083,
     description:
-      'A rare three-shrine Hoysala temple north of Halebidu, with a long pillared hall linking its sanctums.',
+      'A rare three-shrine Hoysala temple north of Halebeedu, with a long pillared hall linking its sanctums.',
     image: 'belavadi',
     imageAlt: 'North view of the Veera Narayana temple at Belavadi',
     roadDistanceKm: km(15.7),
@@ -116,7 +116,7 @@ export const attractions: Attraction[] = [
     latitude: 13.096,
     longitude: 76.00389,
     description:
-      'One of the earliest Hoysala temples, beside a village lake south of Halebidu — four shrines around a shared hall.',
+      'One of the earliest Hoysala temples, beside a village lake south of Halebeedu — four shrines around a shared hall.',
     image: 'doddagaddavalli',
     imageAlt: 'Lakshmi Devi temple complex at Doddagaddavalli',
     roadDistanceKm: km(15.8),

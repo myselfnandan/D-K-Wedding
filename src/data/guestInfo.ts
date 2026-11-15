@@ -38,7 +38,6 @@ export const CONTACTS = {
 
 /** Unknown at time of build — kept explicit so the UI shows "to be shared" rather than guessing. */
 export const PENDING = {
-  accommodation: null as string | null,
   dressCode: null as string | null,
 };
 

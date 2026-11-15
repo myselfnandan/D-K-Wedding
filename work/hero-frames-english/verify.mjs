@@ -338,14 +338,23 @@ for (const w of [360, 390, 768, 1440]) {
   await page.locator('#rsvp').scrollIntoViewIfNeeded();
   await page.fill('#rsvp input[autocomplete="name"]', 'Test Guest');
   await page.click('#rsvp button:has-text("Joyfully, yes")');
+  await sleep(500);
+  await page.click('#rsvp button:has-text("Yes, please arrange")');
   await page.click('#rsvp button[type="submit"]');
   await sleep(300);
   const opened = await page.evaluate(() => window.__opened);
   const waHref = await page.locator('#info a[href^="https://wa.me/"]').first().getAttribute('href');
+  const msg = opened[0] ? decodeURIComponent(opened[0].split('?text=')[1]) : '';
+  const card = await page.locator('#info').innerText();
   record(
-    'RSVP opens the WhatsApp link',
-    opened.length === 1 && opened[0].startsWith('https://wa.me/919980450419?text=') && waHref === 'https://wa.me/919980450419',
-    `window.open → ${opened[0]?.slice(0, 60)}…; info link=${waHref}`,
+    'RSVP opens the WhatsApp link, with the accommodation choice',
+    opened.length === 1 && opened[0].startsWith('https://wa.me/919980450419?text=') && waHref === 'https://wa.me/919980450419' && msg.includes('Accommodation: Needed, please arrange'),
+    `message lines: ${msg.split('\n').join(' | ')}; info link=${waHref}`,
+  );
+  record(
+    'accommodation card asks guests to tell the family in advance',
+    card.includes('Need a room? Please let the family know in advance.') && !card.includes('Details from the family will be shared here'),
+    card.split('\n').find((l) => l.includes('Need a room')) ?? '(not found)',
   );
   const footer = await page.locator('footer').innerText();
   // Owner asked (14 Nov 2026) to drop the credits list, the illustrations line and the Gemini line from the footer.

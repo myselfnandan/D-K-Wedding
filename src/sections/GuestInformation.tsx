@@ -38,7 +38,15 @@ export function GuestInformation() {
           <Reveal className="card info-card" delay={0.1}>
             <BedDouble size={20} aria-hidden="true" />
             <h3 className="display h-sm">Accommodation</h3>
-            <p className="muted">{PENDING.accommodation ?? 'Details from the family will be shared here. Please check with them before booking.'}</p>
+            <p>
+              Need a room? Please let the family know in advance. Choose <strong>“Yes, please arrange”</strong> under Accommodation when you
+              RSVP.
+            </p>
+            <div className="info-actions">
+              <a className="btn btn-primary btn-sm" href="#rsvp">
+                RSVP with accommodation
+              </a>
+            </div>
             {PUBLIC_STAY_OPTIONS.map((o) => (
               <div key={o.name} className="stay-opt">
                 <p className="small"><strong>{o.name}</strong> — a public option, not arranged by the family.</p>
@@ -72,6 +80,7 @@ export function RSVPSection() {
   const [attending, setAttending] = useState<'yes' | 'no' | ''>('');
   const [arrival, setArrival] = useState('Wed 2 Dec');
   const [from, setFrom] = useState('');
+  const [stay, setStay] = useState<'yes' | 'no' | ''>('');
   const [note, setNote] = useState('');
   const [error, setError] = useState('');
   const [sent, setSent] = useState(false);
@@ -84,6 +93,7 @@ export function RSVPSection() {
     ];
     if (attending === 'yes') {
       lines.push(`Arriving: ${arrival}`);
+      if (stay) lines.push(stay === 'yes' ? 'Accommodation: Needed, please arrange' : 'Accommodation: Not needed');
       if (from.trim()) lines.push(`Travelling from: ${from.trim()}`);
     }
     if (note.trim()) lines.push(`Note: ${note.trim()}`);
@@ -145,6 +155,17 @@ export function RSVPSection() {
                     <option>Thu 3 Dec morning</option>
                   </select>
                 </label>
+                <fieldset>
+                  <legend>Accommodation</legend>
+                  <div className="chips">
+                    <button type="button" className="chip" aria-pressed={stay === 'yes'} onClick={() => setStay('yes')}>
+                      Yes, please arrange
+                    </button>
+                    <button type="button" className="chip" aria-pressed={stay === 'no'} onClick={() => setStay('no')}>
+                      No, not needed
+                    </button>
+                  </div>
+                </fieldset>
                 <label>
                   <span>Travelling from (optional)</span>
                   <input value={from} onChange={(e) => setFrom(e.target.value)} placeholder="e.g. Bengaluru" />

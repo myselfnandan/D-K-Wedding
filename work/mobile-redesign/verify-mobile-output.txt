@@ -31,11 +31,11 @@ PASS  [360x740] hero panel "venue" readable and usable
 PASS  [360x740] hero panel "venue" contrast meets WCAG AA over the film
       5 text boxes; tightest "Halebeedu, Belur Taluk, Hass" 7.91:1 (needs 4.5:1); median 8.92:1
 PASS  page height at 390×844 ≤ 18,000 px
-      scrollHeight=11817px (before: 31,238px)
+      scrollHeight=11923px (before: 31,238px)
 PASS  no screen without visible text (390×844, 80% steps)
       18 steps; empty at y=[]
 PASS  closing: copy clear of the illustration, contrast ≥ 4.5:1
-      copy bottom=281 scene top=281; lowest "Awaiting your arrival" 7.65:1
+      copy bottom=282 scene top=282; lowest "Awaiting your arrival" 7.65:1
 PASS  [390x844] reduced motion: all panel content stacked, ≤ 2 frame requests
       missing=[] canvas=false anchors=true; /frames/ requests=1 [mobile/poster.avif]
 PASS  [360x740] reduced motion: all panel content stacked, ≤ 2 frame requests
@@ -55,6 +55,6 @@ PASS  no "Scroll to unfold" cue
 PASS  no individual names besides the couple
       found=[]
 PASS  animations replay when a section comes back on screen
-      card text opacity: first view=1, scrolled away=0, just back=0.634656, settled=1; taali knot width just back=0px, settled=11.1px
+      card text opacity: first view=1, scrolled away=0, just back=0.859736, settled=1; taali knot width just back=0px, settled=11.1px
 
 29/29 checks passed

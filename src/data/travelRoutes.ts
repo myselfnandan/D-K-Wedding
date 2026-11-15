@@ -73,7 +73,7 @@ export const travelRoutes: TravelRoute[] = [
     distanceKm: v(32.6),
     driveMinutes: v(51),
     via: 'NH 373',
-    notes: ['Nearest major railway station named by Karnataka Tourism. Take a taxi onward to Halebidu.'],
+    notes: ['Nearest major railway station named by Karnataka Tourism. Take a taxi onward to Halebeedu.'],
     mapUrl: to('Hassan Junction railway station'),
   },
   {

@@ -8,7 +8,7 @@ import type { Attraction } from '../data/types';
 
 export const VIEW = 1000;
 /**
- * The venue sits low and to the right: almost every place lies north or west of Halebidu, so this lets them fill
+ * The venue sits low and to the right: almost every place lies north or west of Halebeedu, so this lets them fill
  * the frame instead of leaving the east and south empty. Outer rings run off the right edge, as on a cropped map.
  */
 export const CX = 620;
@@ -25,10 +25,10 @@ const VENUE = { lat: 13.1888179, lon: 75.9913076 };
 
 /**
  * Approximate compass bearings (degrees, 0 = north, clockwise) for places whose exact coordinates are not in the
- * data. Taken from each town's general direction from Halebidu, used only to place a pin on the illustrative map.
+ * data. Taken from each town's general direction from Halebeedu, used only to place a pin on the illustrative map.
  */
 export const APPROX_BEARING: Record<string, number> = {
-  kedareshwara: 14, // in Halebidu, beside the Hoysaleswara temple
+  kedareshwara: 14, // in Halebeedu, beside the Hoysaleswara temple
   'basadi-halli': 2, // Basadi Halli, just north of the Hoysaleswara temple
   yagachi: 276, // the reservoir beside Belur
   chikkamagaluru: 300,

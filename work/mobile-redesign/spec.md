@@ -19,7 +19,7 @@ The scroll track gets longer so that each panel has room: **mobile 420svh** (scr
 - **Only the active panel is interactive.** The others get `inert` and `pointer-events: none` (the existing pattern, extended to four panels). Panels are `<section>`-like groups with headings, so a screen reader reads them in document order whatever their opacity.
 - **Anchors:** invisible markers inside the track at each panel's scroll position (`#invitation` → panel 2, `#programme` → panel 3). The nav and the "Scroll" cue jump there.
 - **Reduced motion:** a static poster stage with the four panels stacked in normal document flow on an ink background. No film, as now.
-- The three short captions ("Halebidu · the old Hoysala capital" etc.) are **removed**; the real content replaces them.
+- The three short captions ("Halebeedu · the old Hoysala capital" etc.) are **removed**; the real content replaces them.
 
 New data access: a `programme()` helper in `src/data/weddingEvents.ts`, or reuse `timeText` from WeddingTimeline, moved to `utils/timeCalculations.ts` so that both use one formatter. The hero and the timeline must never disagree on a time.
 

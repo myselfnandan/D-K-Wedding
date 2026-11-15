@@ -145,7 +145,7 @@ export function PlacesMap() {
           </Reveal>
           <Reveal delay={0.08}>
             <h2 id="places-title" className="display h-lg">
-              Around <span className="italic">Halebidu</span>
+              Around <span className="italic">Halebeedu</span>
             </h2>
           </Reveal>
           <Reveal delay={0.12}>

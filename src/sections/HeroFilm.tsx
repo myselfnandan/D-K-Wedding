@@ -91,7 +91,7 @@ function OpeningPanel({ ready, reduce }: { ready: boolean; reduce: boolean }) {
         <span>Muhurtha 8:30 – 9:30 am</span>
       </motion.div>
       <motion.p className="hero-venue" {...rise(1.3)}>
-        {VENUE.name} · Halebidu, Hassan
+        {VENUE.name} · Halebeedu, Hassan
       </motion.p>
       <motion.div className="countdown" role="timer" aria-label="Time until the Muhurtha" {...rise(1.5)}>
         {cd.done ? (

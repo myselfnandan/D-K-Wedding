@@ -54,7 +54,7 @@ Run these stages in order: **intent → spec → plan → implement → verify �
 - **Overlays:** keep the current content (names, date, Muhurtha time, venue, countdown, RSVP and Directions buttons, scroll cue), but choreograph it over the film:
   - From 0 to 0.15: the title block is fully visible over a soft indigo gradient at the bottom (palette `--ink`), so the text keeps at least 4.5:1 contrast.
   - From 0.15 to 0.45: it fades and rises out.
-  - From 0.45 to 0.9: three short captions appear in turn, matching the camera moving in: "Halebidu · the old Hoysala capital", "Thursday, 3 December 2026", "Step inside — you're invited".
+  - From 0.45 to 0.9: three short captions appear in turn, matching the camera moving in: "Halebeedu · the old Hoysala capital", "Thursday, 3 December 2026", "Step inside — you're invited".
   - From 0.9 to 1: the film darkens and dissolves into the Invitation section.
 - **Preloader:** replace the fake percentage with the real share of keyframes loaded. Hard cap of 1.8 s, then reveal anyway. It must never block scrolling.
 - **`prefers-reduced-motion`:** a single static poster-frame hero (normal height, no scrubbing, no frame downloads beyond the poster), with the same text and buttons.

@@ -15,12 +15,12 @@ const c = (id: string, file: string, author: string, license: string, licenseUrl
 });
 
 export const imageCredits: ImageCredit[] = [
-  c('hero', 'Hoysaleswara Temple at Halebidu.jpg', 'Rohit Sharma', 'CC BY-SA 4.0', BYSA4, 'The Hoysaleswara temple at Halebidu'),
+  c('hero', 'Hoysaleswara Temple at Halebeedu.jpg', 'Rohit Sharma', 'CC BY-SA 4.0', BYSA4, 'The Hoysaleswara temple at Halebeedu'),
   c('hoysaleswara', 'Hoysaleshwara temple in Monsoon.JPG', 'Karthikbs23', 'CC BY-SA 3.0', BYSA3, 'Hoysaleswara temple after the rains'),
-  c('hoysaleswara-carving', 'Reliefs, Sculptures, and Interior of Hoysaleswara Temple Halebidu DSCN6284 7.jpg', 'Goutam1962', 'CC BY-SA 4.0', BYSA4, 'Carved reliefs on the Hoysaleswara temple wall'),
-  c('makara', '1150 CE Hoysaleswara temple Halebidu Karnataka, Makara mythical animal.jpg', 'Ms Sarah Welch', 'CC0', 'https://creativecommons.org/publicdomain/zero/1.0/', 'Carved makara, a mythical creature, at Hoysaleswara temple'),
-  c('kedareshwara', 'Kedareshwara Temple in Halebidu.jpg', 'Ankush Manuja', 'CC BY-SA 3.0', BYSA3, 'Kedareshwara temple, Halebidu'),
-  c('basadi', 'Parshvanatha Basadi at Halebidu.jpg', 'Rohit Sharma', 'CC BY-SA 4.0', BYSA4, 'Parshvanatha Basadi, Halebidu'),
+  c('hoysaleswara-carving', 'Reliefs, Sculptures, and Interior of Hoysaleswara Temple Halebeedu DSCN6284 7.jpg', 'Goutam1962', 'CC BY-SA 4.0', BYSA4, 'Carved reliefs on the Hoysaleswara temple wall'),
+  c('makara', '1150 CE Hoysaleswara temple Halebeedu Karnataka, Makara mythical animal.jpg', 'Ms Sarah Welch', 'CC0', 'https://creativecommons.org/publicdomain/zero/1.0/', 'Carved makara, a mythical creature, at Hoysaleswara temple'),
+  c('kedareshwara', 'Kedareshwara Temple in Halebeedu.jpg', 'Ankush Manuja', 'CC BY-SA 3.0', BYSA3, 'Kedareshwara temple, Halebeedu'),
+  c('basadi', 'Parshvanatha Basadi at Halebeedu.jpg', 'Rohit Sharma', 'CC BY-SA 4.0', BYSA4, 'Parshvanatha Basadi, Halebeedu'),
   c('belur', 'Chennakeshava temple Belur 761.jpg', 'Akshatha Inamdar', 'CC BY-SA 4.0', BYSA4, 'Chennakeshava temple, Belur'),
   c('belavadi', 'Sri Veeranarayana Temple , Belavadi North View 01.jpg', 'Bikashrd', 'CC BY-SA 4.0', BYSA4, 'Veera Narayana temple, Belavadi'),
   c('doddagaddavalli', 'Lakshmi Devi Temple, Doddagaddavalli.jpg', 'Bikashrd', 'CC BY-SA 4.0', BYSA4, 'Lakshmi Devi temple, Doddagaddavalli'),
