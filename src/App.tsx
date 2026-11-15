@@ -14,8 +14,8 @@ import { WeddingTimeline } from './sections/WeddingTimeline';
 export default function App() {
   const reduce = useReducedMotion();
   const [ready, setReady] = useState(false);
-  // No frame requests at all under reduced motion: the static hero uses the poster only.
-  const { store, keyProgress } = useFrameSequence(!reduce);
+  // The film loads for everyone: it only moves with the guest's own scroll (see HeroFilm).
+  const { store, keyProgress } = useFrameSequence(true);
   return (
     <>
       <a className="skip-link" href="#celebrations">Skip to the celebrations</a>

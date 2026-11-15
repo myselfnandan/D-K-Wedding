@@ -9,7 +9,7 @@ PASS  [desktop] forward scrub covers the film
 PASS  [desktop] backward scrub rewinds to frame 0
       {"draws":119,"distinct":119,"first":118,"last":0,"reversals":0,"maxJump":1}
 PASS  [desktop] bitmap window capped after 2 full scrubs
-      JS heap used=6.6 MB (total 7.7 MB); live ImageBitmaps=24 (cap 24); decoded <img>=120
+      JS heap used=6.6 MB (total 7.9 MB); live ImageBitmaps=24 (cap 24); decoded <img>=120
 PASS  [mobile] frame set chosen
       kind=mobile
 PASS  [mobile] canvas frames differ by scroll position
@@ -21,7 +21,7 @@ PASS  [mobile] forward scrub covers the film
 PASS  [mobile] backward scrub rewinds to frame 0
       {"draws":119,"distinct":119,"first":118,"last":0,"reversals":0,"maxJump":1}
 PASS  [mobile] bitmap window capped after 2 full scrubs
-      JS heap used=6.7 MB (total 7.4 MB); live ImageBitmaps=16 (cap 16); decoded <img>=120
+      JS heap used=6.7 MB (total 7.7 MB); live ImageBitmaps=16 (cap 16); decoded <img>=120
 PASS  [desktop] poster painted without any frame
       {"complete":true,"src":"frames/desktop/poster.avif","fp":"high","loading":"eager","frameDrawn":null}
 PASS  [desktop] title text contrast meets WCAG AA over the poster
@@ -30,10 +30,10 @@ PASS  [mobile] poster painted without any frame
       {"complete":true,"src":"frames/mobile/poster.avif","fp":"high","loading":"eager","frameDrawn":null}
 PASS  [mobile] title text contrast meets WCAG AA over the poster
       .hero-kicker 10.69:1 (needs 3), .hero-content .eyebrow 7.27:1 (needs 4.5), .hero-names 7.26:1 (needs 3), .hero-meta 8.66:1 (needs 4.5), .hero-venue 7.76:1 (needs 4.5), .cd-label 10.74:1 (needs 4.5)
-PASS  [desktop] reduced motion: static hero, ≤ 2 frame requests
-      /frames/ requests=1 [desktop/poster.avif]; {"canvas":false,"video":false,"height":900,"vh":900,"cls":"hero-film hero-static dark"}
-PASS  [mobile] reduced motion: static hero, ≤ 2 frame requests
-      /frames/ requests=1 [mobile/poster.avif]; {"canvas":false,"video":false,"height":844,"vh":844,"cls":"hero-film hero-static dark"}
+PASS  [desktop] reduced motion: film still scrubs, no entrance
+      entrance shown=false; frame at 20% / 80% / back to 20% = 24 / 95 / 24; <video>=false
+PASS  [mobile] reduced motion: film still scrubs, no entrance
+      entrance shown=false; frame at 20% / 80% / back to 20% = 24 / 95 / 24; <video>=false
 PASS  [360px] no horizontal overflow
       html scrollWidth − innerWidth=0px; max scrollX after scrollTo(500,·)=0; clipped body excess (info)=0px; <video>=0
 PASS  [390px] no horizontal overflow

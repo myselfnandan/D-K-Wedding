@@ -260,7 +260,7 @@ function Panel({ i, p, className, children, refs }: { i: number; p: MotionValue<
   );
 }
 
-function ScrubbedHero({ ready, store }: { ready: boolean; store: FrameStore | null }) {
+function ScrubbedHero({ ready, store, reduce }: { ready: boolean; store: FrameStore | null; reduce: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -268,7 +268,9 @@ function ScrubbedHero({ ready, store }: { ready: boolean; store: FrameStore | nu
 
   const { scrollYProgress: p } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });
   const rawIndex = useTransform(p, (v) => Math.min(1, Math.max(0, v)) * (count - 1));
-  const index = useSpring(rawIndex, { stiffness: 120, damping: 30 });
+  // Reduced motion: the film follows the scroll exactly, with no extra smoothing motion of its own.
+  const smooth = useSpring(rawIndex, { stiffness: 120, damping: 30 });
+  const index = reduce ? rawIndex : smooth;
   useCanvasScrub(canvasRef, store, index);
 
   // Only the panel being read can be clicked or focused; the others are inert.
@@ -307,7 +309,7 @@ function ScrubbedHero({ ready, store }: { ready: boolean; store: FrameStore | nu
         <motion.div className="hero-shade-read" style={{ opacity: readShade }} aria-hidden="true" />
         <motion.div className="hero-darken" style={{ opacity: darken }} aria-hidden="true" />
         <Panel i={0} p={p} className="hero-content wrap" refs={panelRefs}>
-          <OpeningPanel ready={ready} reduce={false} />
+          <OpeningPanel ready={ready} reduce={reduce} />
         </Panel>
         <Panel i={1} p={p} className="hero-read wrap" refs={panelRefs}>
           <FamiliesPanel />
@@ -323,35 +325,13 @@ function ScrubbedHero({ ready, store }: { ready: boolean; store: FrameStore | nu
   );
 }
 
-/* ---------- Reduced motion: the same content, stacked in normal flow over the poster ---------- */
-
-function StaticHero() {
-  return (
-    <section id="welcome" className="hero-film hero-static dark" aria-label="Welcome">
-      <div className="hero-stage">
-        <Poster />
-        <div className="hero-shade" aria-hidden="true" />
-        <div className="hero-content wrap">
-          <OpeningPanel ready reduce />
-        </div>
-      </div>
-      <div className="hero-static-more wrap">
-        <div id="invitation" className="hero-read">
-          <FamiliesPanel />
-        </div>
-        <div id="programme" className="hero-read">
-          <ProgrammePanel />
-        </div>
-        <div className="hero-read">
-          <VenuePanel />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** Opening film: the invitation unfolds in four panels over scroll-scrubbed frames. Reduced motion gets the poster and a stacked page. */
+/**
+ * Opening film: the invitation unfolds in four panels over scroll-scrubbed frames.
+ * The film moves only as the guest scrolls, so it stays on with "reduce motion" (Windows animation effects off,
+ * Android "remove animations", iOS "reduce motion"); what that setting removes is everything that moves by itself:
+ * the film's smoothing, the entrance doors and the text rising in.
+ */
 export function HeroFilm({ ready, store }: { ready: boolean; store: FrameStore | null }) {
-  const reduce = useReducedMotion();
-  return reduce ? <StaticHero /> : <ScrubbedHero ready={ready} store={store} />;
+  const reduce = !!useReducedMotion();
+  return <ScrubbedHero ready={ready} store={store} reduce={reduce} />;
 }

@@ -186,29 +186,28 @@ for (const ph of PHONES) {
   await ctx.close();
 }
 
-// ---------- 6: reduced motion ----------
+// ---------- 6: reduced motion: the film still scrubs and every panel is reachable; no entrance ----------
 for (const ph of PHONES) {
-  const reqs = [];
   const ctx = await browser.newContext({ ...ph, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  page.on('request', (r) => r.url().includes('/frames/') && reqs.push(r.url().split('/frames/')[1]));
-  await page.goto(BASE);
-  await sleep(1500);
-  await page.evaluate(async () => {
-    for (let y = 0; y < document.body.scrollHeight; y += innerHeight) {
-      window.scrollTo(0, y);
-      await new Promise((r) => setTimeout(r, 50));
-    }
-  });
-  const st = await page.evaluate((all) => {
-    const s = document.getElementById('welcome');
-    const txt = s.textContent;
-    return { missing: all.filter((t) => !txt.includes(t)), canvas: !!s.querySelector('canvas'), anchors: ['invitation', 'programme'].every((id) => !!document.getElementById(id)) };
-  }, PANELS.flatMap((p) => p.text));
+  await page.goto(`${BASE}?debugFrames`);
+  await page.waitForFunction(() => window.__heroFrames && window.__heroFrames.images.filter(Boolean).length === 120, null, { timeout: 30000 }).catch(() => {});
+  const entrance = await page.evaluate(() => !!document.querySelector('.preloader'));
+  const seen = [];
+  for (const panel of PANELS) {
+    await toProgress(page, panel.at);
+    await sleep(700);
+    seen.push(await page.evaluate(({ id, text }) => {
+      const el = document.querySelector(`[data-panel="${id}"]`);
+      return { id, opacity: +getComputedStyle(el).opacity, missing: text.filter((t) => !el.textContent.includes(t)), frame: document.querySelector('.hero-canvas')?.dataset.frame ?? null };
+    }, panel));
+  }
+  const frames = seen.map((s) => +s.frame);
+  const ok = !entrance && seen.every((s) => s.opacity >= 0.95 && !s.missing.length) && frames.every((f, i) => i === 0 || f > frames[i - 1]);
   record(
-    `[${ph.label}] reduced motion: all panel content stacked, ≤ 2 frame requests`,
-    !st.missing.length && !st.canvas && st.anchors && reqs.length <= 2,
-    `missing=[${st.missing.join(' | ')}] canvas=${st.canvas} anchors=${st.anchors}; /frames/ requests=${reqs.length} [${reqs.join(', ')}]`,
+    `[${ph.label}] reduced motion: film scrubs, all panels readable, no entrance`,
+    ok,
+    `entrance shown=${entrance}; ${seen.map((s) => `${s.id} opacity=${s.opacity} frame=${s.frame}${s.missing.length ? ` missing=${s.missing.join('|')}` : ''}`).join('; ')}`,
   );
   await page.screenshot({ path: `work/mobile-redesign/after/reduced-${ph.label}.png`, fullPage: false });
   await ctx.close();

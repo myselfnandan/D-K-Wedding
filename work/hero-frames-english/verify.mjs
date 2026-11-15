@@ -226,30 +226,26 @@ for (const [label, opts] of Object.entries(VIEWPORTS)) {
   await ctx.close();
 }
 
-// ---------- 3. Reduced motion: static hero, ≤ 2 /frames/ requests ----------
+// ---------- 3. Reduced motion (owner, 15 Nov 2026): the film still scrubs (it moves only with the guest's scroll);
+// the entrance doors are skipped and nothing moves by itself. ----------
 for (const [label, opts] of Object.entries(VIEWPORTS)) {
-  const reqs = [];
-  const { ctx, page } = await open({ ...opts, reducedMotion: 'reduce' }, BASE, (page) =>
-    page.on('request', (r) => r.url().includes('/frames/') && reqs.push(r.url().split('/frames/')[1])),
-  );
-  await page.evaluate(async () => {
-    for (let y = 0; y < document.body.scrollHeight; y += innerHeight) {
-      window.scrollTo(0, y);
-      await new Promise((r) => setTimeout(r, 60));
-    }
-    window.scrollTo(0, 0);
-  });
-  await sleep(1000);
-  const shape = await page.evaluate(() => {
-    const s = document.getElementById('welcome');
-    // Since mobile-redesign the static hero is one poster screen followed by the stacked panels; the stage is what must stay one screen.
-    return { canvas: !!document.querySelector('canvas'), video: !!document.querySelector('video'), height: s.querySelector('.hero-stage').offsetHeight, vh: innerHeight, cls: s.className };
-  });
+  const { ctx, page } = await open({ ...opts, reducedMotion: 'reduce' }, `${BASE}?debugFrames`);
+  await page.waitForFunction(() => window.__heroFrames && window.__heroFrames.images.filter(Boolean).length === 120, null, { timeout: 30000 }).catch(() => {});
+  const preloaderShown = await page.evaluate(() => !!document.querySelector('.preloader'));
+  const frameAt = async (q) => {
+    await toProgress(page, q);
+    await sleep(800);
+    return page.evaluate(() => document.querySelector('.hero-canvas')?.dataset.frame ?? null);
+  };
+  const f1 = await frameAt(0.2);
+  const f2 = await frameAt(0.8);
+  const f3 = await frameAt(0.2);
+  const video = await page.evaluate(() => !!document.querySelector('video'));
   await page.screenshot({ path: `${OUT}/${opts.viewport.width}x${opts.viewport.height}-reduced-motion.png` });
   record(
-    `[${label}] reduced motion: static hero, ≤ 2 frame requests`,
-    reqs.length <= 2 && !shape.canvas && !shape.video && shape.height < shape.vh * 1.5,
-    `/frames/ requests=${reqs.length} [${reqs.join(', ')}]; ${JSON.stringify(shape)}`,
+    `[${label}] reduced motion: film still scrubs, no entrance`,
+    !preloaderShown && f1 !== null && +f2 > +f1 && f3 === f1 && !video,
+    `entrance shown=${preloaderShown}; frame at 20% / 80% / back to 20% = ${f1} / ${f2} / ${f3}; <video>=${video}`,
   );
   await ctx.close();
 }

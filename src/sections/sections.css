@@ -404,6 +404,7 @@
 }
 .closing-scene {
   position: relative;
+  height: clamp(200px, 32vh, 420px);
   height: clamp(200px, 32svh, 420px);
 }
 .closing-scene::after {

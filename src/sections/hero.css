@@ -1,30 +1,46 @@
-/* Opening film: a tall scroll track with a sticky 100svh stage. No overflow on the section, or sticky breaks.
+/* Opening film: a tall scroll track with a sticky full-screen stage. No overflow on the section, or sticky breaks.
    Four invitation panels take turns over the film (timing in src/utils/heroPanels.ts). */
 /* Historic-temple palette for the opening: warm stone shades and sandstone accents (not the site's indigo). */
 .hero-film {
   --shade: 34, 32, 28;
   --stone: #22201c;
   --sand: #e3cfa6;
-  background: var(--stone);
-  --track: 380svh;
+  /* vh first for browsers without the small-viewport unit; svh where supported (see @supports below). */
+  --screen: 100vh;
+  --track: 380vh;
   position: relative;
   height: var(--track);
   isolation: isolate;
+}
+@supports (height: 100svh) {
+  .hero-film {
+    --screen: 100svh;
+    --track: 380svh;
+  }
+}
+/* Two classes: the global .dark rule (navy) loads later and would otherwise win, and any gap below the stage
+   (e.g. while a phone's browser bar hides) would show navy. */
+.hero-film.dark {
+  background: var(--stone);
 }
 /* Link targets inside the track, placed at a panel's scroll position. */
 .hero-anchor {
   position: absolute;
   left: 0;
-  top: calc((var(--track) - 100svh) * var(--at));
+  top: calc((var(--track) - var(--screen)) * var(--at));
   width: 1px;
   height: 1px;
   pointer-events: none;
 }
+/* The stage follows the visible viewport (dvh) so it always fills the screen as a phone's browser bar shows or
+   hides; older browsers fall back to vh. */
 .hero-stage {
   position: sticky;
   top: 0;
-  height: 100svh;
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
+  background: var(--stone);
 }
 .hero-poster,
 .hero-poster img,
@@ -176,28 +192,6 @@
   }
 }
 
-/* Reduced motion: poster with the opening panel, then the other three panels stacked on ink. */
-.hero-static {
-  height: auto;
-}
-.hero-static .hero-stage {
-  position: relative;
-  height: auto;
-  min-height: 100svh;
-  display: flex;
-  align-items: flex-end;
-}
-.hero-static .hero-stage .hero-content {
-  position: relative;
-  padding-bottom: 72px;
-}
-.hero-static-more {
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-  padding-top: 48px;
-  padding-bottom: 72px;
-}
 
 .scene-svg {
   width: 100%;
