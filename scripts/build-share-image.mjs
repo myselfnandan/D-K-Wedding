@@ -78,7 +78,7 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden}
 .when{margin:12px 0 0;font-family:Marc;font-size:24px;color:#4a2f1b}
 </style></head><body><div class="card"><div class="couple"></div><div class="wash"></div><div class="text">
 <div class="lock"><span class="name a">Dileep</span><span class="amp">&amp;</span><span class="name b">Kavya</span></div>
-<p class="invited">All are invited</p>
+<p class="invited">You are invited</p>
 <p class="when">Thursday, 3 December 2026 · Halebeedu</p>
 </div></div></body></html>`;
 
